@@ -1,0 +1,45 @@
+footer
+{
+    background-color: #ffdb58;
+    height: 105px;
+    display: flex;
+    align-items: center;
+    padding-left: 86px;
+    & h6
+    {
+        color: #7c7c7c;
+    }
+}
+
+
+
+#divItemDetailsContainer
+{
+    padding: 0 5%;   
+}
+
+#navMainNavBar
+{
+    color: #696969;
+    font-weight: bold;
+
+    & label
+    {
+        margin-left: 1rem;
+    }
+
+    & #mainNavBar
+    {
+        display: flex;
+        justify-content: end;
+
+        & ul
+        {
+            margin-right: 5rem;
+            /* & li
+            {
+                margin: 0 1rem;
+            } */
+        }
+    }
+}
