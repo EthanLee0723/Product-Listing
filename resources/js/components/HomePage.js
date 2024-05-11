@@ -43,11 +43,11 @@ export default function HomePage() {
             <div id="divHomePageStayInTouchSec">
                 <div>
                     <h2>Stay in touch</h2>
-                    <label>Stay informed about our latest product releases and promotions! Sign up for our newsletter to receive exclusive updates directly in your inbox.</label>
+                    <label className='normalText'>Stay informed about our latest product releases and promotions! Sign up for our newsletter to receive exclusive updates directly in your inbox.</label>
                     <div>
-                        <div className='inputPlaceholderContainer'>
-                            <input className='inToBePlacehold' placeholder=" "></input>
-                            <label className='lblPlaceholder'>Email Address</label>
+                        <div className='inputPlaceholderContainer m-0'>
+                            <input placeholder=" "></input>
+                            <label>Email Address</label>
                         </div>
                         <a className='btnOrange'>Sign up</a>
                     </div>

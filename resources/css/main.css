@@ -239,18 +239,52 @@ footer
 
 #divContactPageContainer
 {
-    padding-left: 10rem;
-    padding-right: 10rem;
+    gap: 3rem;
+    background-color: rgb(246, 246, 246);
+    display: flex;
+    justify-content: center;
 
-    & h1,label
+    & > div
     {
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        min-width: 300px;
+        gap: 1rem;
+        margin: 3rem 0;
+
+        
+        & h1,label
+        {
+            text-align: center;
+        }
+
+        & h4
+        {
+            font-size: 38px;
+        }
+
+        & form
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+
+            & div
+            {
+                width: 100%;
+            }
+        }
     }
 }
 
 .inputPlaceholderContainer
 {   
     position: relative;
+    margin-bottom: 1rem;
 
     & input
     {
@@ -302,4 +336,26 @@ footer
     padding: 1rem 2rem;
     font-weight: 700;
     cursor: pointer;
+}
+
+.normalText
+{
+    color: rgb(94, 94, 94);
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 18px;
+}
+
+.normalTitle
+{
+    font-size: 51px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+}
+
+.subTitle
+{
+    font-size: 25px;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-weight: 400;
+    color: rgb(27, 27, 27);
 }
