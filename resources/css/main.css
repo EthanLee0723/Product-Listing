@@ -1,45 +1,305 @@
+a
+{
+    color: unset;
+    text-decoration: none;
+}
+
 footer
 {
-    background-color: #ffdb58;
-    height: 105px;
-    display: flex;
-    align-items: center;
-    padding-left: 86px;
-    & h6
-    {
-        color: #7c7c7c;
-    }
-}
-
-
-
-#divItemDetailsContainer
-{
-    padding: 0 5%;   
-}
-
-#navMainNavBar
-{
-    color: #696969;
-    font-weight: bold;
+    background-color: rgb(22, 22, 22);
+    padding: 32px 0;
 
     & label
     {
-        margin-left: 1rem;
+        color: rgb(169, 169, 169);
+        margin-left: 5rem;
+    }
+}
+
+#navMainNavbar
+{
+    height: 93px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    transition: background-color .5s;
+    padding: 0 3rem;
+    z-index: 1000000;
+
+    & a label
+    {
+        cursor: pointer;
     }
 
-    & #mainNavBar
+    & label
+    {
+        font-size: 51px;
+        font-weight: 900;
+        font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    &.scrolled
+    {
+        background-color: rgb(255, 255, 255, .9);
+    }
+}
+
+#divHomePageLatestProductsContainer
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 5rem 0;
+    
+    & h2
+    {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+}
+
+#divHomePageStayInTouchSec
+{
+    background-color: rgb(246, 246, 246);
+    padding: 5rem 0;
+
+    & > div
     {
         display: flex;
-        justify-content: end;
+        align-items: center;
+        flex-direction: column;
+        gap: 3rem;
 
-        & ul
+        & > div
         {
-            margin-right: 5rem;
-            /* & li
+            display: flex;
+            gap: 1rem;
+
+            & input
             {
-                margin: 0 1rem;
-            } */
+                min-width: 200px;
+                width: 35vw;
+            }
+        }
+
+        & h2
+        {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 51px;
         }
     }
+}
+
+#divProductsContainer
+{   
+    width: 1200px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    & div
+    {
+        flex: 1;
+        display: flex;
+        gap: .5rem;
+
+        & a
+        {
+            background-image: url('../image/sampleProduct.jpg');
+            background-size: cover;
+            flex: 1;
+            cursor: pointer;
+        }
+    }
+}
+
+#mainNavbarContent
+{
+    & a
+    {
+        font-family: 'Open Sans', arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.071em;
+        text-transform: uppercase;
+
+        &.selected
+        {
+            font-weight: 700;
+        }
+
+        &:not(:last-child){
+            margin-right: 1.75rem;
+        }
+    }
+}
+
+#divSimpleQuote
+{
+    min-height: 85vh;
+    background-image: url('../image/homePageSimpleQuote.jpeg');
+    background-size: cover;
+
+    & div
+    {
+        position: absolute;
+        right: 10%;
+        top: 35%;
+
+        & h1
+        {
+            font-size: 71px;
+            font-family: 'Playfair Display', Georgia, serif;
+            text-align: right;
+        }
+
+        & a
+        {
+            float: right;
+            margin-top: 2rem;
+        }
+    }
+}
+
+#divAboutPageContentContainer
+{
+    display: flex;
+    margin-bottom: 5rem;
+    min-height: calc(100vh - 88px - 5rem);
+
+    & > div
+    {
+        width: 50%;
+
+        & label
+        {
+            font-size: 18px;
+            color: rgb(94, 94, 94);
+        }
+
+        &:first-child
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem;
+
+            & h1
+            {
+                margin-bottom: 2rem;
+            }
+        }
+
+    }
+}
+
+#divAboutPageImg
+{
+    background-image: url('../image/aboutPage.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+#divFAQPageContainer
+{
+    padding-left: 10rem;
+    padding-right: 10rem;
+    margin-bottom: 5rem;
+
+    & h1
+    {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    & > div
+    {
+        margin-bottom: 3rem;
+        font-family: 'Open Sans', arial, sans-serif;
+
+        & h4
+        {
+            margin-bottom: 1rem;
+            font-family: 'Open Sans', arial, sans-serif;
+            font-size: 25px;
+        }
+
+        & label
+        {
+            font-family: 'Open Sans', arial, sans-serif;
+            font-size: 18px;
+            color: rgb(94, 94, 94);
+        }
+    }
+}
+
+#divContactPageContainer
+{
+    padding-left: 10rem;
+    padding-right: 10rem;
+
+    & h1,label
+    {
+        text-align: center;
+    }
+}
+
+.inputPlaceholderContainer
+{   
+    position: relative;
+
+    & input
+    {
+        padding: 1.5rem 1rem .5rem 1rem;
+        border: 0.8px solid rgb(226, 226, 226);
+        border-radius: 4px;
+        width: 100%;
+        display: block;
+
+        &:is(:focus,:not(:placeholder-shown)) + label
+        {
+
+            font-size: 12px;
+            color: rgb(201, 79, 10);
+            top: 8px;
+        }
+    }
+
+    & label
+    {
+        position: absolute;
+        pointer-events: none;
+        left: 16px;
+        top: calc(50% / 2);
+        font-size: 18px;
+        transition: all 0.15s ease 0s;
+    }
+}
+
+.pageContainer
+{
+    padding-top: 93px;
+    min-height: calc(100vh - 88px);
+}
+
+.orangeTitle
+{
+    color: rgb(238, 102, 26);
+    font-size: 51px;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.btnOrange
+{
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(238, 102, 26);
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    cursor: pointer;
 }

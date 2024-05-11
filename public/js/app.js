@@ -9449,12 +9449,13 @@ exports.push([module.i, "@charset \"UTF-8\";/*!\n * Bootstrap  v5.3.3 (https://g
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(/*! ../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "footer\r\n{\r\n    background-color: #ffdb58;\r\n    height: 105px;\r\n    display: flex;\r\n    align-items: center;\r\n    padding-left: 86px;\r\n    & h6\r\n    {\r\n        color: #7c7c7c;\r\n    }\r\n}\r\n\r\n\r\n\r\n#divItemDetailsContainer\r\n{\r\n    padding: 0 5%;   \r\n}\r\n\r\n#navMainNavBar\r\n{\r\n    color: #696969;\r\n    font-weight: bold;\r\n\r\n    & label\r\n    {\r\n        margin-left: 1rem;\r\n    }\r\n\r\n    & #mainNavBar\r\n    {\r\n        display: flex;\r\n        justify-content: end;\r\n\r\n        & ul\r\n        {\r\n            margin-right: 5rem;\r\n            /* & li\r\n            {\r\n                margin: 0 1rem;\r\n            } */\r\n        }\r\n    }\r\n}", ""]);
+exports.push([module.i, "a\r\n{\r\n    color: unset;\r\n    text-decoration: none;\r\n}\r\n\r\nfooter\r\n{\r\n    background-color: rgb(22, 22, 22);\r\n    padding: 32px 0;\r\n\r\n    & label\r\n    {\r\n        color: rgb(169, 169, 169);\r\n        margin-left: 5rem;\r\n    }\r\n}\r\n\r\n#navMainNavbar\r\n{\r\n    height: 93px;\r\n    background-color: transparent;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    position: fixed;\r\n    width: 100vw;\r\n    transition: background-color .5s;\r\n    padding: 0 3rem;\r\n    z-index: 1000000;\r\n\r\n    & a label\r\n    {\r\n        cursor: pointer;\r\n    }\r\n\r\n    & label\r\n    {\r\n        font-size: 51px;\r\n        font-weight: 900;\r\n        font-family: 'Playfair Display', Georgia, serif;\r\n    }\r\n\r\n    &.scrolled\r\n    {\r\n        background-color: rgb(255, 255, 255, .9);\r\n    }\r\n}\r\n\r\n#divHomePageLatestProductsContainer\r\n{\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: 5rem 0;\r\n    \r\n    & h2\r\n    {\r\n        text-align: center;\r\n        margin-bottom: 2rem;\r\n    }\r\n}\r\n\r\n#divHomePageStayInTouchSec\r\n{\r\n    background-color: rgb(246, 246, 246);\r\n    padding: 5rem 0;\r\n\r\n    & > div\r\n    {\r\n        display: flex;\r\n        align-items: center;\r\n        flex-direction: column;\r\n        gap: 3rem;\r\n\r\n        & > div\r\n        {\r\n            display: flex;\r\n            gap: 1rem;\r\n\r\n            & input\r\n            {\r\n                min-width: 200px;\r\n                width: 35vw;\r\n            }\r\n        }\r\n\r\n        & h2\r\n        {\r\n            font-family: 'Playfair Display', Georgia, serif;\r\n            font-size: 51px;\r\n        }\r\n    }\r\n}\r\n\r\n#divProductsContainer\r\n{   \r\n    width: 1200px;\r\n    height: 600px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: .5rem;\r\n\r\n    & div\r\n    {\r\n        flex: 1;\r\n        display: flex;\r\n        gap: .5rem;\r\n\r\n        & a\r\n        {\r\n            background-image: url(" + escape(__webpack_require__(/*! ../image/sampleProduct.jpg */ "./resources/image/sampleProduct.jpg")) + ");\r\n            background-size: cover;\r\n            flex: 1;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n}\r\n\r\n#mainNavbarContent\r\n{\r\n    & a\r\n    {\r\n        font-family: 'Open Sans', arial, sans-serif;\r\n        font-size: 16px;\r\n        font-weight: 400;\r\n        letter-spacing: 0.071em;\r\n        text-transform: uppercase;\r\n\r\n        &.selected\r\n        {\r\n            font-weight: 700;\r\n        }\r\n\r\n        &:not(:last-child){\r\n            margin-right: 1.75rem;\r\n        }\r\n    }\r\n}\r\n\r\n#divSimpleQuote\r\n{\r\n    min-height: 85vh;\r\n    background-image: url(" + escape(__webpack_require__(/*! ../image/homePageSimpleQuote.jpeg */ "./resources/image/homePageSimpleQuote.jpeg")) + ");\r\n    background-size: cover;\r\n\r\n    & div\r\n    {\r\n        position: absolute;\r\n        right: 10%;\r\n        top: 35%;\r\n\r\n        & h1\r\n        {\r\n            font-size: 71px;\r\n            font-family: 'Playfair Display', Georgia, serif;\r\n            text-align: right;\r\n        }\r\n\r\n        & a\r\n        {\r\n            float: right;\r\n            margin-top: 2rem;\r\n        }\r\n    }\r\n}\r\n\r\n#divAboutPageContentContainer\r\n{\r\n    display: flex;\r\n    margin-bottom: 5rem;\r\n    min-height: calc(100vh - 88px - 5rem);\r\n\r\n    & > div\r\n    {\r\n        width: 50%;\r\n\r\n        & label\r\n        {\r\n            font-size: 18px;\r\n            color: rgb(94, 94, 94);\r\n        }\r\n\r\n        &:first-child\r\n        {\r\n            display: flex;\r\n            justify-content: center;\r\n            align-items: center;\r\n            padding: 5rem;\r\n\r\n            & h1\r\n            {\r\n                margin-bottom: 2rem;\r\n            }\r\n        }\r\n\r\n    }\r\n}\r\n\r\n#divAboutPageImg\r\n{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../image/aboutPage.jpeg */ "./resources/image/aboutPage.jpeg")) + ");\r\n    background-size: cover;\r\n    background-position: center;\r\n}\r\n\r\n#divFAQPageContainer\r\n{\r\n    padding-left: 10rem;\r\n    padding-right: 10rem;\r\n    margin-bottom: 5rem;\r\n\r\n    & h1\r\n    {\r\n        text-align: center;\r\n        margin-bottom: 5rem;\r\n    }\r\n\r\n    & > div\r\n    {\r\n        margin-bottom: 3rem;\r\n        font-family: 'Open Sans', arial, sans-serif;\r\n\r\n        & h4\r\n        {\r\n            margin-bottom: 1rem;\r\n            font-family: 'Open Sans', arial, sans-serif;\r\n            font-size: 25px;\r\n        }\r\n\r\n        & label\r\n        {\r\n            font-family: 'Open Sans', arial, sans-serif;\r\n            font-size: 18px;\r\n            color: rgb(94, 94, 94);\r\n        }\r\n    }\r\n}\r\n\r\n#divContactPageContainer\r\n{\r\n    padding-left: 10rem;\r\n    padding-right: 10rem;\r\n\r\n    & h1,label\r\n    {\r\n        text-align: center;\r\n    }\r\n}\r\n\r\n.inputPlaceholderContainer\r\n{   \r\n    position: relative;\r\n\r\n    & input\r\n    {\r\n        padding: 1.5rem 1rem .5rem 1rem;\r\n        border: 0.8px solid rgb(226, 226, 226);\r\n        border-radius: 4px;\r\n        width: 100%;\r\n        display: block;\r\n\r\n        &:is(:focus,:not(:-moz-placeholder-shown)) + label\r\n        {\r\n\r\n            font-size: 12px;\r\n            color: rgb(201, 79, 10);\r\n            top: 8px;\r\n        }\r\n\r\n        &:is(:focus,:not(:placeholder-shown)) + label\r\n        {\r\n\r\n            font-size: 12px;\r\n            color: rgb(201, 79, 10);\r\n            top: 8px;\r\n        }\r\n    }\r\n\r\n    & label\r\n    {\r\n        position: absolute;\r\n        pointer-events: none;\r\n        left: 16px;\r\n        top: calc(50% / 2);\r\n        font-size: 18px;\r\n        transition: all 0.15s ease 0s;\r\n    }\r\n}\r\n\r\n.pageContainer\r\n{\r\n    padding-top: 93px;\r\n    min-height: calc(100vh - 88px);\r\n}\r\n\r\n.orangeTitle\r\n{\r\n    color: rgb(238, 102, 26);\r\n    font-size: 51px;\r\n    font-family: 'Playfair Display', Georgia, serif;\r\n}\r\n\r\n.btnOrange\r\n{\r\n    text-transform: uppercase;\r\n    color: white;\r\n    background-color: rgb(238, 102, 26);\r\n    border-radius: 4px;\r\n    padding: 1rem 2rem;\r\n    font-weight: 700;\r\n    cursor: pointer;\r\n}", ""]);
 
 // exports
 
@@ -9543,6 +9544,33 @@ function toComment(sourceMap) {
 	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
 	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/url/escape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/css-loader/lib/url/escape.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
 }
 
 
@@ -69445,6 +69473,39 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./resources/image/aboutPage.jpeg":
+/*!****************************************!*\
+  !*** ./resources/image/aboutPage.jpeg ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/aboutPage.jpeg?c297a893d123a6f8e9997af916736499";
+
+/***/ }),
+
+/***/ "./resources/image/homePageSimpleQuote.jpeg":
+/*!**************************************************!*\
+  !*** ./resources/image/homePageSimpleQuote.jpeg ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/homePageSimpleQuote.jpeg?cc3b4d8aa41cfa9e04fa525ad210fc71";
+
+/***/ }),
+
+/***/ "./resources/image/sampleProduct.jpg":
+/*!*******************************************!*\
+  !*** ./resources/image/sampleProduct.jpg ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/sampleProduct.jpg?58c2c3d5bcefb65ff1f0a12176bb46ce";
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -69466,7 +69527,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(/*! ./components/MainLayout */ "./resources/js/components/MainLayout.js");
+__webpack_require__(/*! ./components/HomePage */ "./resources/js/components/HomePage.js");
+__webpack_require__(/*! ./components/AboutPage */ "./resources/js/components/AboutPage.js");
+__webpack_require__(/*! ./components/FAQPage */ "./resources/js/components/FAQPage.js");
+__webpack_require__(/*! ./components/ContactPage */ "./resources/js/components/ContactPage.js");
+__webpack_require__(/*! ./components/ProductsPage */ "./resources/js/components/ProductsPage.js");
 
 /***/ }),
 
@@ -69519,77 +69584,295 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/MainLayout.js":
+/***/ "./resources/js/components/AboutPage.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/AboutPage.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AboutPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MainNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainNavbar */ "./resources/js/components/MainNavbar.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/components/MainFooter.js");
+
+
+
+
+function AboutPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainNavbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divAboutPageContentContainer",
+    className: "pageContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "orangeTitle"
+  }, "About Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Goods To You Solution is a one-stop center on Corporate & Premium Gifts. We are here to fulfil customer needs in providing a creative, innovative and inspiring ideas using our services and products that we carry. We have a large variety of products ranging from bags, pens, household items, dairies & calendars, Eco products, umbrellas, desktop items, lanyards, bottles & mugs. etc. Throughout our years in the business, we have our own specialties & standby-ready products at our warehouse waiting to deliver at any time.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Choose Goods To You Solution for personalized premium corporate gifts supplier that reflect your brand's values and image. Let us help you create lasting impressions that matter."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divAboutPageImg"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFooter__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+}
+if (document.getElementById('aboutPage')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AboutPage, null), document.getElementById('aboutPage'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ContactPage.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/ContactPage.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ContactPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MainNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainNavbar */ "./resources/js/components/MainNavbar.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/components/MainFooter.js");
+
+
+
+
+function ContactPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainNavbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divContactPageContainer",
+    className: "pageContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "orangeTitle"
+  }, "Contact Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Fill in this form and we will get back to you  as soon as possible information that you provided here will be held in our database with the utmost discretion and confidentiality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "inputPlaceholderContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    placeholder: " "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "inputPlaceholderContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    placeholder: " "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "inputPlaceholderContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    placeholder: " "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Phone number")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "inputPlaceholderContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    placeholder: " "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "btnOrange"
+  }, "Send")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Or contact us directly via"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Phone: +60 11-2755 9303 (Mr Ong)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Email: goods2you213@gmail.com"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Operating Hours: Mon - Fri 9am - 6pm"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFooter__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+}
+if (document.getElementById('contactPage')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ContactPage, null), document.getElementById('contactPage'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/FAQPage.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/FAQPage.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FAQPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MainNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainNavbar */ "./resources/js/components/MainNavbar.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/components/MainFooter.js");
+
+
+
+
+function FAQPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainNavbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divFAQPageContainer",
+    className: "pageContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "orangeTitle"
+  }, "Frequently Asked Questions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Is there minimum order quantity?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "We do have a small minimum order quantity, let us know how many units you are looking to produce, and we can advise a suitable product to tailor to your budget and ideas. The MOQ is subject to product type and whether they are ready-made or custom-made.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you only supplying the product on your website?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "The products shown in our website are just some samples and examples for illustration purposes so you get an idea of what we are able to produce. We are able to supply a wide range of customization merchandise, gifts, stationery, bags and many more, so do contact us if you have anything in specific that you'd like to customize, but did not see in our website.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "If I'm interested to produce something, but I do not have any ideas, can you advise?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Most certainly, we take pride in providing a bespoke full service from product selection to design and delivery. If you're not sure what's a suitable gift or merchandise to produce, we can help recommend something impact and memorable to your intended audience. Even if you have an idea of what you want, but design is not your expertise, we can also help you design & customize your brand into the products that you are interested in."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFooter__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+}
+if (document.getElementById('faqPage')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FAQPage, null), document.getElementById('faqPage'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/HomePage.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/HomePage.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HomePage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MainNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainNavbar */ "./resources/js/components/MainNavbar.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/components/MainFooter.js");
+
+
+
+
+function HomePage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainNavbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divSimpleQuote"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Delivering quality", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "goods to you."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/products",
+    className: "btnOrange"
+  }, "View Products"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divHomePageLatestProductsContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "orangeTitle"
+  }, "Latest products"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divProductsContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "divHomePageStayInTouchSec"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Stay in touch"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Stay informed about our latest product releases and promotions! Sign up for our newsletter to receive exclusive updates directly in your inbox."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "inputPlaceholderContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "inToBePlacehold",
+    placeholder: " "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "lblPlaceholder"
+  }, "Email Address")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "btnOrange"
+  }, "Sign up")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFooter__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+}
+if (document.getElementById('homePage')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomePage, null), document.getElementById('homePage'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/MainFooter.js":
 /*!***********************************************!*\
-  !*** ./resources/js/components/MainLayout.js ***!
+  !*** ./resources/js/components/MainFooter.js ***!
   \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MainFooter; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle.min */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../css/main.css */ "./resources/css/main.css");
-/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_5__);
 
 
-
-
-
-
-function MainLayout() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    id: "navMainNavBar",
-    className: "navbar navbar-expand-lg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "GTY Solutions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "collapse navbar-collapse",
-    id: "mainNavBar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "navbar-nav"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link"
-  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link",
-    href: "#"
-  }, "About")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link",
-    href: "#"
-  }, "Shop")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link"
-  }, "FAQ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link btn"
-  }, "Contact")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "divItemDetailsContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table table-bordered"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product code"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Packing Detail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Dimension (mm)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100(H) x 85(D)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Weight per Unit(g)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Units per Inner Box"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Weight per Carton (kg)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Units per Carton"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Carton Size (mm)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Print Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Print Area"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Demo"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Copyright 2024 \xA9 GTY | Brand Of The Day")));
+function MainFooter() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Copyright \xA9 2020 GTY Solutions - All Rights Reserved."));
 }
-/* harmony default export */ __webpack_exports__["default"] = (MainLayout);
-if (document.getElementById('mainLayout')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MainLayout, null), document.getElementById('mainLayout'));
+if (document.getElementById('mainFooter')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MainFooter, null), document.getElementById('mainFooter'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/MainNavbar.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/MainNavbar.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MainNavbar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle.min */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../css/main.css */ "./resources/css/main.css");
+/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+function MainNavbar() {
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()(function () {
+    var pathName = window.location.pathname;
+    jquery__WEBPACK_IMPORTED_MODULE_5___default()("#mainNavbarContent a[href='" + pathName + "']").addClass("selected");
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).on("scroll", function (ev) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_5___default()(ev.currentTarget).scrollTop() > 0 && !jquery__WEBPACK_IMPORTED_MODULE_5___default()("nav").hasClass("scrolled")) {
+      jquery__WEBPACK_IMPORTED_MODULE_5___default()("nav").addClass("scrolled");
+    } else if (jquery__WEBPACK_IMPORTED_MODULE_5___default()(ev.currentTarget).scrollTop() === 0) {
+      jquery__WEBPACK_IMPORTED_MODULE_5___default()("nav").removeClass("scrolled");
+    }
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    id: "navMainNavbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/home"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "GTY Solutions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "mainNavbarContent"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/home"
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/about"
+  }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/FAQ"
+  }, "FAQ"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/contact"
+  }, "Contact Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/products"
+  }, "Products")));
+}
+if (document.getElementById('mainNavbar')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MainNavbar, null), document.getElementById('mainNavbar'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ProductsPage.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ProductsPage.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProductsPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MainNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainNavbar */ "./resources/js/components/MainNavbar.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/components/MainFooter.js");
+
+
+
+
+function ProductsPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainNavbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pageContainer"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFooter__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+}
+if (document.getElementById('productsPage')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProductsPage, null), document.getElementById('productsPage'));
 }
 
 /***/ }),
@@ -69612,8 +69895,8 @@ if (document.getElementById('mainLayout')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Desktop\Freelance\Product_Listing\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Desktop\Freelance\Product_Listing\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Wei Jie Lee\Desktop\Freelance\Product_Listing\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Wei Jie Lee\Desktop\Freelance\Product_Listing\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
