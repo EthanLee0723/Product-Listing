@@ -1,3 +1,8 @@
+:root
+{
+    --colorPrimary: rgb(238, 102, 26);
+}
+
 a
 {
     color: unset;
@@ -13,6 +18,52 @@ footer
     {
         color: rgb(169, 169, 169);
         margin-left: 5rem;
+    }
+}
+
+#divProductsPageContainer
+{
+    display: flex;
+
+    & > div:first-child
+    {
+        flex: 25;
+        & > div
+        {
+            & h5
+            {
+                font-weight: bold;
+            }
+
+            & svg
+            {
+                float: right;
+                cursor: pointer;
+            }
+
+            & :is(.collapsed,.expanded)
+            {
+                margin-left: 2rem;
+
+                &.collapsed
+                {
+                    display: none;
+                }
+            }
+
+            & :is(label,input)
+            {
+                cursor: pointer;
+            }
+            margin-left: 3rem;
+        }
+    }   
+
+    & > div:last-child
+    {
+        flex: 75;
+        padding-left: 3rem;
+        padding-right: 5rem;
     }
 }
 
@@ -277,6 +328,117 @@ footer
             {
                 width: 100%;
             }
+        }
+    }
+}
+
+#divSearchSort
+{
+    display: flex;
+    gap: 1rem;
+    & div:first-child
+    {
+        flex: 70;
+        display: flex;
+    }
+}
+
+#divProductList
+{
+    display: flex;
+
+    & > div
+    {
+        width: 25%;
+        aspect-ratio: 7/8;
+        border: 1px solid lightgray;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        transition: all .5s;
+
+        &:hover
+        {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px 1px lightgray;
+
+            & > div:last-child
+            {
+                background-color: lightgray;
+            }
+        }
+
+        
+
+        & > div:first-child
+        {
+            flex: 1;
+            & img
+            {
+                width: 100%;
+            }
+        }
+
+        & > div:last-child
+        {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+
+            & label
+            {
+                font-size: 1.25rem;
+                font-family: "Poppins", "Odoo Unicode Support Noto", sans-serif;
+
+                &:first-child
+                {
+                    color: var(--colorPrimary);
+                }
+            }
+        }
+    }
+}
+
+.divDropdown
+{   
+    position: relative;
+    display: inline-block;
+    margin-left: .25rem;
+
+    & > div
+    {
+        position: absolute;
+        border: 1px solid black;
+
+        & div
+        {
+            padding: .5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover
+            {
+                background-color: lightgray;
+            }
+
+            &:active
+            {
+                background-color: gray;
+            }
+        }
+        
+
+        &.collapsed
+        {
+            display: none;
+        }
+
+        &.expanded
+        {
+            display: block;
         }
     }
 }

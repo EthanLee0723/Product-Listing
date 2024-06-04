@@ -33,6 +33,13 @@ Route::get("/contact",function(){
     return view("contactPage");
 });
 
-Route::get("/products",function(){
-    return view("productsPage");
+Route::group(["prefix"=>"/products"],function()
+{
+    Route::get("/",function(){
+        return view("productsPage");
+    });
+    
+    Route::post("/getProductsByFilter","ProductsController@getProductsByFilter");
+
+    Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
 });

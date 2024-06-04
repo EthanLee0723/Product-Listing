@@ -26,6 +26,11 @@
         "vue-template-compiler": "^2.7.16"
     },
     "dependencies": {
-        "5": "^0.0.1"
+        "5": "^0.0.1",
+        "@fortawesome/fontawesome-svg-core": "^6.5.2",
+        "@fortawesome/free-brands-svg-icons": "^6.5.2",
+        "@fortawesome/free-regular-svg-icons": "^6.5.2",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
+        "@fortawesome/react-fontawesome": "^0.2.2"
     }
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/main.css';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 export default function MainNavbar() {
     $(()=>{
