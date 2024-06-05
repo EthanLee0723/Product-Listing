@@ -33,6 +33,24 @@ Route::get("/contact",function(){
     return view("contactPage");
 });
 
-Route::get("/products",function(){
-    return view("productsPage");
+Route::group(["prefix"=>"login"],function()
+{   
+    Route::get("/",function(){
+        return view("loginPage");
+    });
+
+    Route::post("/","MainController@login");    
+});
+
+Route::group(["prefix"=>"/products"],function()
+{
+    Route::get("/",function(){
+        return view("productsPage");
+    });
+
+    Route::get("/productDetails/{id}","ProductsController@getProductDetails");
+    
+    Route::post("/getProductsByFilter","ProductsController@getProductsByFilter");
+
+    Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
 });
