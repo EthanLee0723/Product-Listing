@@ -7,7 +7,7 @@ import '../../library/fontawesome-free-6.5.2-web/js/all.min.js';
 import '../../library/fontawesome-free-6.5.2-web/css/all.min.css';
 
 
-export default function ProductsPage() {
+export default function ProductsPage({isAdmin}) {
     let testProducts = [];
 
     for(let x = 0;x < 5;x++)
@@ -48,14 +48,14 @@ export default function ProductsPage() {
                         <div id='divSearchSort'>
                             <div>
                                 <input className='form-control' placeholder='Search...'></input>
-                                <button className='btn btn-primary'>
+                                <button className='btn btnPrimary'>
                                     <i className="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
                             <div>
                                 <label>Sort By:</label>
                                 <div className='divDropdown'>
-                                    <button className='btn btn-primary'>Newest Arrivals<i className="ms-1 fa-solid fa-sort-down"></i></button>
+                                    <button className='btn btnPrimary'>Newest Arrivals<i className="ms-1 fa-solid fa-sort-down"></i></button>
                                     <div className='collapsed'>
                                         <div>Newest Arrivals</div>
                                         <div>Name (A - Z)</div>
@@ -153,5 +153,5 @@ $(document).on("click",(ev)=>{
 })
 
 if (document.getElementById('productsPage')) {
-    ReactDOM.render(<ProductsPage />, document.getElementById('productsPage'));
+    ReactDOM.render(<ProductsPage {...data}/>, document.getElementById('productsPage'));
 }

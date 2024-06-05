@@ -17,3 +17,4 @@ require('./components/AboutPage');
 require('./components/FAQPage');
 require('./components/ContactPage');
 require('./components/ProductsPage');
+require('./components/LoginPage');

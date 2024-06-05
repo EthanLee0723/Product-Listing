@@ -1,6 +1,7 @@
 :root
 {
     --colorPrimary: rgb(238, 102, 26);
+    --colorPrimaryHover: rgba(238, 102, 26, .8);
 }
 
 a
@@ -18,6 +19,32 @@ footer
     {
         color: rgb(169, 169, 169);
         margin-left: 5rem;
+    }
+}
+
+#divLoginPageContainer
+{
+    background-color: rgb(246, 246, 246);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 0 10px lightgray;
+        min-width: 300px;
+        width: 50%;
+        aspect-ratio: 3/2;
+        justify-content: space-between;
     }
 }
 
@@ -336,26 +363,43 @@ footer
 {
     display: flex;
     gap: 1rem;
+
     & div:first-child
     {
         flex: 70;
         display: flex;
+
+        & input
+        {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        & button
+        {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
     }
 }
 
 #divProductList
 {
     display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between ;
 
     & > div
     {
-        width: 25%;
+        flex-basis: 23.5%;
         aspect-ratio: 7/8;
         border: 1px solid lightgray;
         display: flex;
         flex-direction: column;
         cursor: pointer;
         transition: all .5s;
+        margin-top: 2%;
+        border-radius: 5px;
 
         &:hover
         {
@@ -402,6 +446,19 @@ footer
     }
 }
 
+.btnPrimary
+{
+    background-color: var(--colorPrimary);
+    border: 1px solid var(--colorPrimary);
+    color: white;
+    
+    &:is(:hover,:active)
+    {
+        background-color: var(--colorPrimaryHover) !important;
+        color: white !important;
+    }
+}
+
 .divDropdown
 {   
     position: relative;
@@ -411,7 +468,10 @@ footer
     & > div
     {
         position: absolute;
-        border: 1px solid black;
+        border: 1px solid lightgray;
+        background-color: white;
+        border-radius: 5px;
+        z-index: 100000;
 
         & div
         {
