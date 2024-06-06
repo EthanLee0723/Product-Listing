@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
 import { useState } from 'react';
-import '../../library/fontawesome-free-6.5.2-web/js/all.min.js';
-import '../../library/fontawesome-free-6.5.2-web/css/all.min.css';
 
 
-export default function ProductsPage({isAdmin}) {
+export default function ProductsPage() {
     let testProducts = [];
 
     for(let x = 0;x < 5;x++)
@@ -39,7 +37,7 @@ export default function ProductsPage({isAdmin}) {
                     <div>
                         <div>
                             <h5>Categories</h5>
-                            <div>
+                            <div id="divProductCategoriesSidebar">
                                 {productsCategories}
                             </div>
                         </div>
@@ -87,7 +85,7 @@ export default function ProductsPage({isAdmin}) {
             headers: { "X-CSRF-TOKEN": _token },
             success:(data)=>{
                 arrProductsCategories = arrProductsCategories.concat(data);
-                const htmlProductCategories = arrProductsCategories.map((val,ind)=>{
+                let htmlProductCategories = arrProductsCategories.map((val,ind)=>{
                     let htmlSubCategories = [];
                     if(val.subcategory_name)
                     {
@@ -97,7 +95,7 @@ export default function ProductsPage({isAdmin}) {
                                 <label htmlFor={"subcategory"+val.subcategory_id[ind]}>{value}</label>
                             </div>)
                         })
-        
+
                         htmlSubCategories = <>
                             <i className="fa-solid fa-chevron-right"></i><div className="collapsed">{htmlSubCategories}</div>
                         </>
@@ -117,23 +115,11 @@ export default function ProductsPage({isAdmin}) {
     }
 }
 
-$(document).on("click","svg.fa-chevron-right,svg.fa-chevron-down",(ev)=>{
+$(document).on("click","#divProductCategoriesSidebar svg.fa-chevron-right,svg.fa-chevron-down",(ev)=>{
     const elementToPerformAction = $(ev.currentTarget).next("div");
-
-    if($(ev.currentTarget).hasClass("fa-chevron-right"))
-    {
-        $(ev.currentTarget).removeClass("fa-chevron-right");
-        $(ev.currentTarget).addClass("fa-chevron-down");
-        elementToPerformAction.removeClass("collapsed");
-        elementToPerformAction.addClass("expanded");
-    }
-    else
-    {
-        $(ev.currentTarget).removeClass("fa-chevron-down");
-        $(ev.currentTarget).addClass("fa-chevron-right");
-        elementToPerformAction.removeClass("expanded");
-        elementToPerformAction.addClass("collapsed");
-    }
+    
+    $(ev.currentTarget).toggleClass("fa-chevron-right fa-chevron-down");
+    elementToPerformAction.toggleClass("collapsed expanded");
 })
 
 $(document).on("click",".dropdown button",(ev)=>{
@@ -145,7 +131,6 @@ $(document).on("click",".divDropdown button",(ev)=>{
 })
 
 $(document).on("click",(ev)=>{
-    
     if($(ev.target)[0] !== $(".divDropdown button")[0])
     {
         $(".divDropdown .expanded").toggleClass("expanded collapsed");
@@ -153,5 +138,5 @@ $(document).on("click",(ev)=>{
 })
 
 if (document.getElementById('productsPage')) {
-    ReactDOM.render(<ProductsPage {...data}/>, document.getElementById('productsPage'));
+    ReactDOM.render(<ProductsPage/>, document.getElementById('productsPage'));
 }
