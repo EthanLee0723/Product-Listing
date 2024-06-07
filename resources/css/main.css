@@ -29,6 +29,43 @@ button
     padding:0;
 }
 
+#divManageCategoriesPageContainer
+{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--colorPrimary);
+}
+
+#divManageCategoriesContainer
+{
+    box-shadow: 0 0 10px gray;
+    background-color: white;
+    height: 85vh;
+    width: 70vw;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+
+    & > div
+    {
+        width: 50%;
+
+        & .divSubcategories,.divAddSubcateogryContainer
+        {
+            margin-left: 3rem;
+
+            &.divAddSubcateogryContainer:hover
+            {
+                background-color: lightgray;
+            }
+        }
+    }
+}
+
 #divAdminSidebar
 {
     box-shadow: 3px 0 5px gray;

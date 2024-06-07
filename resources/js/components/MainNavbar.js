@@ -44,14 +44,14 @@ export default function MainNavbar() {
         mainLayout = <>
                         {mainLayout}
                         <div id="divAdminSidebar" className='collapsed'>
-                            <div data-bs-toggle="modal" data-bs-target="#mdlProducts">Products</div>
-                            <div data-bs-toggle="modal" data-bs-target="#mdlCategories">Categories</div>
+                            <div onClick={()=>{window.location.href = "/manageProducts"}}>Products</div>
+                            <div onClick={()=>{window.location.href = "/manageCategories"}}>Categories</div>
                         </div>
                         <button id="btnAdminSidebar" className='collapsed'>
                             <i className="fa-solid fa-chevron-right"></i>
                         </button>
-                        <CategoriesModal/>
-                        <ProductsModal/>
+                        {/* <CategoriesModal/>
+                        <ProductsModal/> */}
                     </>
     }
 
@@ -78,8 +78,6 @@ $(document).on("mousemove",(ev)=>{
             }
     }
 })
-
-$(".select2").select2();
 
 
 

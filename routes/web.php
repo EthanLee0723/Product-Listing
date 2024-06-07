@@ -33,6 +33,16 @@ Route::get("/contact",function(){
     return view("contactPage");
 });
 
+Route::get("/manageCategories",function()
+{
+    return view("manageCategories");
+});
+
+Route::get("/manageProducts",function()
+{
+    return view("manageProducts");
+});
+
 Route::group(["prefix"=>"login"],function()
 {   
     Route::get("/",function(){
