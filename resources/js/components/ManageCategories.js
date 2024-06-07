@@ -1,19 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import MdlAddCategories from './modals/AddCategoryModal';
 
 
 export default function ManageCategories() {
+    const [mdlAddCategoriesData, setMdlAddCategoriesData] = useState({isCategory: true});
     const [productsCategory,setProductsCategories] = useState();
-    getProductsCategories();
+
+    useEffect(()=>{
+        getProductsCategories();
+    },[])
+    
     return (
-        <div id="divManageCategoriesPageContainer">
-            <div id="divManageCategoriesContainer">
-                <div>
-                    {productsCategory}
+        <>
+            <div id="divManageCategoriesPageContainer">
+                <div id="divManageCategoriesContainer">
+                    <div>
+                        {productsCategory}
+                    </div>
                 </div>
             </div>
-        </div>
+            <MdlAddCategories {...mdlAddCategoriesData}/>
+        </>
     )
 
     function getProductsCategories()
@@ -43,27 +52,40 @@ export default function ManageCategories() {
                             </div>)
                         })
 
-                        htmlSubCategories = <>{htmlSubCategories}<div className='divAddSubcateogryContainer'><i class="fa-solid fa-plus"></i><button>Add subcategory</button></div></>
                     }
+                    htmlSubCategories = <>{htmlSubCategories}<div className='divAddSubcateogryContainer'><i className="fa-solid fa-plus"></i><button data-bs-target="#mdlAddCategories" data-bs-toggle="modal" onClick={()=>{showAddSubcategoryMdl(val.id,val.category_name)}}>Add subcategory</button></div></>
 
                     return <div key={val.id} data-category-id={val.id}>
-                        <div className='d-flex justify-content-between'>
-                            <label htmlFor={"category"+val.id}>{val.category_name}</label>
-                            <span>
-                                <i className="fa-solid fa-pen me-1"></i>
-                                <i className="fa-solid fa-trash-can"></i>
-                            </span>
-                        </div>
-                        {htmlSubCategories}
-                    </div>
+                                <div className='d-flex justify-content-between'>
+                                    <label htmlFor={"category"+val.id}>{val.category_name}</label>
+                                    <span>
+                                        <i className="fa-solid fa-pen me-1"></i>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                    </span>
+                                </div>
+                                {htmlSubCategories}
+                            </div>
                 })
+
+                htmlProductCategories = <>{htmlProductCategories}<div className='divAddCategoryContainer'><i className="fa-solid fa-plus"></i><button data-bs-target="#mdlAddCategories" data-bs-toggle="modal" onClick={showAddCategoryMdl}>Add category</button></div></>
 
                 setProductsCategories(htmlProductCategories);
             }
         })
 
     }
+
+    function showAddSubcategoryMdl(categoryId,categoryName)
+    {
+        setMdlAddCategoriesData({isCategory: false,categoryId: categoryId,categoryName: categoryName});
+    }
+
+    function showAddCategoryMdl()
+    {
+        setMdlAddCategoriesData({isCategory:true});
+    }
 }
+
 
 if (document.getElementById('manageCategories')) {
     ReactDOM.render(<ManageCategories/>, document.getElementById('manageCategories'));

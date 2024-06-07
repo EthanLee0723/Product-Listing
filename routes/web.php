@@ -33,14 +33,21 @@ Route::get("/contact",function(){
     return view("contactPage");
 });
 
-Route::get("/manageCategories",function()
-{
-    return view("manageCategories");
-});
-
 Route::get("/manageProducts",function()
 {
     return view("manageProducts");
+});
+
+Route::group(["prefix"=>"/manageCategories"],function()
+{
+    Route::get("/",function()
+    {
+        return view("manageCategories");
+    });
+
+    Route::post("/createCategory","ProductsController@createCategory");
+
+    Route::post("/createSubcategory","ProductsController@createSubcategory");
 });
 
 Route::group(["prefix"=>"login"],function()

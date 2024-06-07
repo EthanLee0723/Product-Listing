@@ -13,12 +13,26 @@ class ProductCategory extends Model
 
     public function getSubcategoryIdAttribute($val)
     {
-        return json_decode($val);
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public function getSubcategoryNameAttribute($val)
     {
-        return json_decode($val);
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public function scopeGeneralQuery($query)

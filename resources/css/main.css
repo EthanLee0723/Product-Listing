@@ -29,6 +29,11 @@ button
     padding:0;
 }
 
+svg.fa-pen,svg.fa-trash-can
+{
+    cursor: pointer;
+}
+
 #divManageCategoriesPageContainer
 {
     height: 100vh;
@@ -50,6 +55,20 @@ button
     justify-content: center;
     padding: 2rem 0;
 
+    & .divAddCategoryContainer
+    {
+        width: fit-content;
+        &:not(:last-child)
+        {
+            margin-bottom: 1rem;
+        }
+
+        &:hover
+        {
+            background-color: lightgray;
+        }
+    }
+
     & > div
     {
         width: 50%;
@@ -58,9 +77,14 @@ button
         {
             margin-left: 3rem;
 
-            &.divAddSubcateogryContainer:hover
+            &.divAddSubcateogryContainer
             {
-                background-color: lightgray;
+                width: fit-content;
+
+                &:hover
+                {
+                    background-color: lightgray;
+                }
             }
         }
     }
