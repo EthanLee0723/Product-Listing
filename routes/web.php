@@ -48,6 +48,11 @@ Route::group(["prefix"=>"/manageCategories"],function()
     Route::post("/createCategory","ProductsController@createCategory");
 
     Route::post("/createSubcategory","ProductsController@createSubcategory");
+
+    Route::post("/delCategory","ProductsController@delCategory");
+
+    Route::post("/delSubcategory","ProductsController@delSubcategory");
+
 });
 
 Route::group(["prefix"=>"login"],function()

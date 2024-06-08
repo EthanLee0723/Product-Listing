@@ -30,11 +30,6 @@ class ProductsController extends Controller
         return ProductCategory::generalQuery()->get();
     }
 
-    public function createNewProduct()
-    {
-
-    }
-
     public function createCategory(Request $request)
     {
         $productCategory = new ProductCategory;
@@ -65,6 +60,38 @@ class ProductsController extends Controller
 
         $productCategory->update();
 
+    }
+
+    public function delCategory(Request $request)
+    {
+        ProductCategory::where("id",$request->categoryId)
+                         ->update(["deleted_at"=>now()]);
+
+        ProductSubcategory::where("category_id",$request->categoryId)
+                            ->update(["deleted_at"=>now()]);
+
+        Products::where("category_id",$request->categoryId)
+                  ->update(["deleted_at"=>now()]);
+    }
+
+    public function delSubcategory(Request $request)
+    {
+        $productSubcategory = ProductSubcategory::where("id",$request->subcategoryId)->first();
+
+        $productCategory = ProductCategory::where("id",$productSubcategory->category_id)->first();
+        
+        $productCategory->subcategory_id = array_diff($productCategory->subcategory_id,[$productSubcategory->id]);
+        $productCategory->subcategory_name = array_diff($productCategory->subcategory_name,[$productSubcategory->subcategory_name]);
+
+        $productCategory->subcategory_id = json_encode($productCategory->subcategory_id);
+        $productCategory->subcategory_name = json_encode($productCategory->subcategory_name);
+
+        $productSubcategory->deleted_at = now();
+        $productSubcategory->update();
+        $productCategory->update();
+
+        Products::where("subcategory_id",$request->subategoryId)
+                  ->update(["deleted_at"=>now()]);
     }
 
 }

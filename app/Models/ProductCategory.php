@@ -15,7 +15,7 @@ class ProductCategory extends Model
     {
         if($val)
         {
-            return is_array($val)?$val:json_decode($val);
+            return is_array($val)?$val:json_decode($val,true);
         }
         else
         {
@@ -27,7 +27,7 @@ class ProductCategory extends Model
     {
         if($val)
         {
-            return is_array($val)?$val:json_decode($val);
+            return is_array($val)?$val:json_decode($val,true);
         }
         else
         {
