@@ -14,7 +14,7 @@ class Products extends Model
 
     public function scopeGeneralQuery($query)
     {
-        $list = $this->query()
+        return $this->query()
                      ->whereNull("deleted_at");
     }
 }

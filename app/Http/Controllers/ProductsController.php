@@ -64,34 +64,66 @@ class ProductsController extends Controller
 
     public function delCategory(Request $request)
     {
-        ProductCategory::where("id",$request->categoryId)
+        ProductCategory::generalQuery()
+                         ->where("id",$request->categoryId)
                          ->update(["deleted_at"=>now()]);
 
-        ProductSubcategory::where("category_id",$request->categoryId)
+        ProductSubcategory::generalQuery()
+                            ->where("category_id",$request->categoryId)
                             ->update(["deleted_at"=>now()]);
 
-        Products::where("category_id",$request->categoryId)
+        Products::generalQuery()
+                  ->where("category_id",$request->categoryId)
                   ->update(["deleted_at"=>now()]);
     }
 
     public function delSubcategory(Request $request)
     {
-        $productSubcategory = ProductSubcategory::where("id",$request->subcategoryId)->first();
+        $productSubcategory = ProductSubcategory::generalQuery()->where("id",$request->subcategoryId)->first();
 
-        $productCategory = ProductCategory::where("id",$productSubcategory->category_id)->first();
-        
-        $productCategory->subcategory_id = array_diff($productCategory->subcategory_id,[$productSubcategory->id]);
-        $productCategory->subcategory_name = array_diff($productCategory->subcategory_name,[$productSubcategory->subcategory_name]);
-
-        $productCategory->subcategory_id = json_encode($productCategory->subcategory_id);
-        $productCategory->subcategory_name = json_encode($productCategory->subcategory_name);
+        $productCategory = ProductCategory::generalQuery()->where("id",$productSubcategory->category_id)->first();
 
         $productSubcategory->deleted_at = now();
         $productSubcategory->update();
+
+        $productSubcategoryIdByCategory = ProductSubcategory::generalQuery()
+                                                              ->where("category_id",$productSubcategory->category_id)
+                                                              ->pluck("id")
+                                                              ->toArray();
+        $productSubcategoryNameByCategory = ProductSubcategory::generalQuery()
+                                                              ->where("category_id",$productSubcategory->category_id)
+                                                              ->pluck("subcategory_name")
+                                                              ->toArray();
+        
+
+        $productCategory->subcategory_id = count($productSubcategoryIdByCategory)?json_encode($productSubcategoryIdByCategory):null;
+        $productCategory->subcategory_name = count($productSubcategoryIdByCategory)?json_encode($productSubcategoryNameByCategory):null;                                                  
+
         $productCategory->update();
 
         Products::where("subcategory_id",$request->subategoryId)
                   ->update(["deleted_at"=>now()]);
+    }
+
+    public function editCategory(Request $request)
+    {
+        // dd($request->toArray());
+        ProductCategory::generalQuery()
+                         ->where("id",$request->categoryId)
+                         ->update(["category_name"=>$request->categoryName]);
+
+        ProductSubcategory::generalQuery()
+                ->where("category_id",$request->categoryId)
+                ->update(["category_name"=>$request->categoryName]);
+
+        Products::generalQuery()
+                  ->where("category_id",$request->categoryId)
+                  ->update(["category_name"=>$request->categoryName]);
+    }
+
+    public function editSubcategory(Request $request)
+    {
+
     }
 
 }

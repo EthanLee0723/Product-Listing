@@ -53,6 +53,10 @@ Route::group(["prefix"=>"/manageCategories"],function()
 
     Route::post("/delSubcategory","ProductsController@delSubcategory");
 
+    Route::post("/editCategory","ProductsController@editCategory");
+
+    Route::post("/editSubcategory","ProductsController@editSubcategory");
+
 });
 
 Route::group(["prefix"=>"login"],function()

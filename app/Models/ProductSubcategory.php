@@ -37,7 +37,7 @@ class ProductSubcategory extends Model
 
     public function scopeGeneralQuery($query)
     {
-        $list = $this->query()
-                     ->whereNull("deleted_at");
+        return $this->query()
+                    ->whereNull("deleted_at");
     }
 }

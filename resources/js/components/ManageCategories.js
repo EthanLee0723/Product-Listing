@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 import MdlAddCategories from './modals/AddCategoryModal';
 import MdlDelCategories from './modals/DelCategoryModal';
+import MdlEditCategories from './modals/EditCategoryModal';
 
 
 export default function ManageCategories() {
     const [mdlDelCategoriesData, setMdlDelCategoriesData] = useState();
     const [mdlAddCategoriesData, setMdlAddCategoriesData] = useState({isCategory: true});
+    const [mdlEditCategoriesData, setMdlEditCategoriesData] = useState();
     const [productsCategory,setProductsCategories] = useState();
 
     useEffect(()=>{
@@ -15,7 +17,7 @@ export default function ManageCategories() {
     },[])
 
     $(document).on("click","svg.fa-trash-can",(ev)=>{
-        const elementToFetchDataFrom = $(ev.currentTarget).closest($(ev.currentTarget).hasClass("delCategories")?".divCategories":".divSubcategories")
+        const elementToFetchDataFrom = $(ev.currentTarget).closest($(ev.currentTarget).hasClass("delCategories")?".divCategoryContainer":".divSubcategories")
         let objData;
 
         if($(ev.currentTarget).hasClass("delCategories"))
@@ -36,6 +38,30 @@ export default function ManageCategories() {
         }
         setMdlDelCategoriesData(objData);
     })
+
+    $(document).on("click","svg.fa-pen",(ev)=>{
+        const elementToFetchDataFrom = $(ev.currentTarget).closest($(ev.currentTarget).hasClass("editCategories")?".divCategoryContainer":".divSubcategories")
+        let objData;
+
+        if($(ev.currentTarget).hasClass("editCategories"))
+        {
+            
+            objData = {
+                isCategory:true,
+                categoryId: elementToFetchDataFrom.attr("data-category-id"),
+                categoryName: elementToFetchDataFrom.attr("data-category-name")
+            }
+        }
+        else
+        {
+            objData = {
+                isCategory:false,
+                categoryId: elementToFetchDataFrom.attr("data-subcategory-id"),
+                categoryName: elementToFetchDataFrom.attr("data-subcategory-name")
+            }
+        }
+        setMdlEditCategoriesData(objData);
+    })
     
     return (
         <>
@@ -48,6 +74,7 @@ export default function ManageCategories() {
             </div>
             <MdlAddCategories {...mdlAddCategoriesData}/>
             <MdlDelCategories {...mdlDelCategoriesData}/>
+            <MdlEditCategories {...mdlEditCategoriesData}/>
         </>
     )
 
@@ -72,20 +99,20 @@ export default function ManageCategories() {
                                     <label htmlFor={"subcategory"+val.subcategory_id[ind]}>{value}</label>
                                 </span>
                                 <span>
-                                    <i className="fa-solid fa-pen me-1"></i>
+                                    <i className="fa-solid fa-pen me-1 editSubcategories" data-bs-toggle="modal" data-bs-target="#mdlEditCategories"></i>
                                     <i className="fa-solid fa-trash-can delSubcategories" data-bs-toggle="modal" data-bs-target="#mdlDelCategories"></i>
                                 </span>
                             </div>)
                         })
 
                     }
-                    htmlSubCategories = <>{htmlSubCategories}<div><i className="fa-solid fa-plus"></i><button data-bs-target="#mdlAddCategories" data-bs-toggle="modal" onClick={()=>showAddSubcategoryMdl(val.id,val.category_name)}>Add subcategory</button></div></>
+                    htmlSubCategories = <>{htmlSubCategories}<div className='divAddSubcateogryContainer'><i className="fa-solid fa-plus"></i><button data-bs-target="#mdlAddCategories" data-bs-toggle="modal" onClick={()=>showAddSubcategoryMdl(val.id,val.category_name)}>Add subcategory</button></div></>
 
                     return <div key={val.id} data-category-id={val.id} data-category-name={val.category_name} className='divCategoryContainer'>
                                 <div className='d-flex justify-content-between'>
                                     <label htmlFor={"category"+val.id}>{val.category_name}</label>
                                     <span>
-                                        <i className="fa-solid fa-pen me-1"></i>
+                                        <i className="fa-solid fa-pen me-1 editCategories" data-bs-toggle="modal" data-bs-target="#mdlEditCategories"></i>
                                         <i className="fa-solid fa-trash-can delCategories" data-bs-toggle="modal" data-bs-target="#mdlDelCategories"></i>
                                     </span>
                                 </div>
