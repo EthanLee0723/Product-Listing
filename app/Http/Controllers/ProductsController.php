@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ProductCategory;
+use Storage;
 
 class ProductsController extends Controller
 {
@@ -31,7 +32,7 @@ class ProductsController extends Controller
 
     public function createNewProduct()
     {
-        
+
     }
 
     public function createNewProductCategory()
@@ -43,5 +44,26 @@ class ProductsController extends Controller
     {
 
     }
+
+    public function uploadimages(Request $request){
+
+        // Check if the request has files
+        if ($request->hasFile('images')) {
+            $uploadedFiles = $request->file('images'); // Get the uploaded files
+            $filePaths = [];
+
+            Storage::disk('uploads') -> put($uploadedFiles, file_get_contents($uploadedFiles -> getRealPath()));
+
+
+
+
+
+            // Return the file paths or any other response as required
+            return response()->json(['file_paths' => $filePaths], 200);
+        }
+
+
+    }
+
 
 }

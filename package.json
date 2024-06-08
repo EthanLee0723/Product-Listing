@@ -13,8 +13,8 @@
         "@babel/preset-react": "^7.0.0",
         "axios": "^0.19",
         "bootstrap": "^5.3.3",
-        "cross-env": "^7.0",
-        "jquery": "^3.2",
+        "cross-env": "^7.0.3",
+        "jquery": "^3.7.1",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
@@ -31,6 +31,7 @@
         "@fortawesome/free-brands-svg-icons": "^6.5.2",
         "@fortawesome/free-regular-svg-icons": "^6.5.2",
         "@fortawesome/free-solid-svg-icons": "^6.5.2",
-        "@fortawesome/react-fontawesome": "^0.2.2"
+        "@fortawesome/react-fontawesome": "^0.2.2",
+        "react-dropzone": "^14.2.3"
     }
 }

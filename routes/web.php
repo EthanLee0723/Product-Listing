@@ -44,12 +44,12 @@ Route::get("/manageProducts",function()
 });
 
 Route::group(["prefix"=>"login"],function()
-{   
+{
     Route::get("/",function(){
         return view("loginPage");
     });
 
-    Route::post("/","MainController@login");    
+    Route::post("/","MainController@login");
 });
 
 Route::group(["prefix"=>"/products"],function()
@@ -59,8 +59,11 @@ Route::group(["prefix"=>"/products"],function()
     });
 
     Route::get("/productDetails/{id}","ProductsController@getProductDetails");
-    
+
     Route::post("/getProductsByFilter","ProductsController@getProductsByFilter");
 
     Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
+
+    Route::post("/uploadimages","ProductsController@uploadimages");
+
 });

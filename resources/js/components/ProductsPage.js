@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDropzone } from 'react-dropzone';
 import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
 import { useState } from 'react';
+import { useCallback } from 'react';
+import $ from 'jquery';
 
 
 export default function ProductsPage() {
@@ -23,54 +26,133 @@ export default function ProductsPage() {
     testProducts = <>{testProducts}</>
 
     const [productsCategories, setProductsCategories] = useState();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [files, setFiles] = useState([]);
+
     const [products,setProducts] = useState(testProducts);
+
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+    };
+
+    const onDrop = useCallback((acceptedFiles) => {
+        setFiles([...files, ...acceptedFiles]);
+    }, [files]);
+
 
     if(!productsCategories)
     {
         getProductsCategories();
     }
 
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop,
+        accept: 'image/*' // Only accept images
+      });
+
     return (
         <>
-            <MainNavbar/>
-                <div id="divProductsPageContainer" className='pageContainer'>
-                    <div>
-                        <div>
-                            <h5>Categories</h5>
-                            <div id="divProductCategoriesSidebar">
-                                {productsCategories}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div id='divSearchSort'>
-                            <div>
-                                <input className='form-control' placeholder='Search...'></input>
-                                <button className='btn btnPrimary'>
-                                    <i className="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <label>Sort By:</label>
-                                <div className='divDropdown'>
-                                    <button className='btn btnPrimary'>Newest Arrivals<i className="ms-1 fa-solid fa-sort-down"></i></button>
-                                    <div className='collapsed'>
-                                        <div>Newest Arrivals</div>
-                                        <div>Name (A - Z)</div>
-                                        <div>Price - Low to High</div>
-                                        <div>Price - High to Low</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="divProductList">
-                            {products}
-                        </div>
+            <MainNavbar />
+            <div id="divProductsPageContainer" className='pageContainer'>
+                <div>
+                <div>
+                    <h5>Categories</h5>
+                    <div id="divProductCategoriesSidebar">
+                    {productsCategories}
                     </div>
                 </div>
-            <MainFooter/>
+                <div>
+                    <button id="uploadimage" className='btn btnPrimary' onClick={toggleModal}>Upload Image</button>
+                </div>
+                </div>
+                <div>
+                <div id='divSearchSort'>
+                    <div>
+                    <input className='form-control' placeholder='Search...'></input>
+                    <button className='btn btnPrimary'>
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    </div>
+                    <div>
+                    <label>Sort By:</label>
+                    <div className='divDropdown'>
+                        <button className='btn btnPrimary'>Newest Arrivals<i className="ms-1 fa-solid fa-sort-down"></i></button>
+                        <div className='collapsed'>
+                        <div>Newest Arrivals</div>
+                        <div>Name (A - Z)</div>
+                        <div>Price - Low to High</div>
+                        <div>Price - High to Low</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div id="divProductList">
+                    {products}
+                </div>
+                </div>
+            </div>
+            <MainFooter />
+
+            {/* Modal */}
+            {modalVisible && (
+                <div className="modal show d-block" tabIndex="-1">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Upload Image</h5>
+                        <button type="button" className="btn-close" aria-label="Close" onClick={toggleModal}></button>
+                    </div>
+                    <div className="modal-body">
+                        <div {...getRootProps({ className: 'dropzone' })}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop some image files here, or click to select images</p>
+                        </div>
+                        <div>
+                        {files.map((file, index) => (
+                            <div key={index}>{file.name}</div>
+                        ))}
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" onClick={toggleModal}>Close</button>
+                        <button type="button" className="btn btn-primary" onClick={uploadimage}>Upload</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            )}
         </>
-    );
+      );
+
+
+    function uploadimage(){
+
+        const formData = new FormData();
+
+        files.forEach((file) => {
+          formData.append('images', file);
+        });
+
+        $.ajax({
+          url: '/products/uploadimages', // replace with your actual upload endpoint
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: { 'X-CSRF-TOKEN': _token }, // replace `_token` with your actual CSRF token variable
+          success: function (result) {
+            console.log(result);
+            setFiles([]); // Clear the files after successful upload
+            toggleModal();
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log('error');
+            console.error(textStatus, errorThrown);
+          },
+        });
+      };
+
+
 
     function getProductsCategories()
     {
@@ -117,7 +199,7 @@ export default function ProductsPage() {
 
 $(document).on("click","#divProductCategoriesSidebar svg.fa-chevron-right,svg.fa-chevron-down",(ev)=>{
     const elementToPerformAction = $(ev.currentTarget).next("div");
-    
+
     $(ev.currentTarget).toggleClass("fa-chevron-right fa-chevron-down");
     elementToPerformAction.toggleClass("collapsed expanded");
 })
