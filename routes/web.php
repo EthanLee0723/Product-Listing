@@ -33,9 +33,20 @@ Route::get("/contact",function(){
     return view("contactPage");
 });
 
-Route::get("/manageProducts",function()
+Route::group(["prefix"=>"manageProducts"],function()
 {
-    return view("manageProducts");
+    Route::get("/",function()
+    {
+        return view("manageProducts");
+    });
+
+    Route::get("/getProductsCategories","ProductsController@getProductsCategories");
+
+    Route::get("/getProductsSubcategories","ProductsController@getProductsSubcategories");
+
+    Route::get("/getAllProducts","ProductsController@getAllProducts");
+
+    Route::post("/createNewProduct","ProductsController@createNewProduct");
 });
 
 Route::group(["prefix"=>"/manageCategories"],function()
@@ -77,6 +88,8 @@ Route::group(["prefix"=>"/products"],function()
     Route::get("/productDetails/{id}","ProductsController@getProductDetails");
     
     Route::post("/getProductsByFilter","ProductsController@getProductsByFilter");
+
+    Route::get("/getAllProducts","ProductsController@getAllProducts");
 
     Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
 });

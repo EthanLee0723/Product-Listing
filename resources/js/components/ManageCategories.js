@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import MdlAddCategories from './modals/AddCategoryModal';
 import MdlDelCategories from './modals/DelCategoryModal';
 import MdlEditCategories from './modals/EditCategoryModal';
+import AdminSidebar from './adminSidebar';
 
 
 export default function ManageCategories() {
@@ -72,6 +73,7 @@ export default function ManageCategories() {
                     </div>
                 </div>
             </div>
+            <AdminSidebar />
             <MdlAddCategories {...mdlAddCategoriesData}/>
             <MdlDelCategories {...mdlDelCategoriesData}/>
             <MdlEditCategories {...mdlEditCategoriesData}/>

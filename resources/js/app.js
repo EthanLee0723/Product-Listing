@@ -19,3 +19,4 @@ require('./components/ContactPage');
 require('./components/ProductsPage');
 require('./components/LoginPage');
 require('./components/ManageCategories');
+require('./components/ManageProducts');

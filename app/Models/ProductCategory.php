@@ -35,6 +35,30 @@ class ProductCategory extends Model
         }
     }
 
+    public function getProductIdAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductNameAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function scopeGeneralQuery($query)
     {
         return $this->query()

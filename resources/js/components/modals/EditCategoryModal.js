@@ -51,7 +51,7 @@ export default function MdlEditCategories({isCategory,categoryId,categoryName}) 
             type: "post",
             headers: { 'X-CSRF-TOKEN':_token },
             data: {
-                categoryId: categoryId,
+                subcategoryId: categoryId,
                 subcategoryName: $("#inEditCategoryName").val()
             },
             success:()=>{

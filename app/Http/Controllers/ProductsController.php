@@ -107,14 +107,13 @@ class ProductsController extends Controller
 
     public function editCategory(Request $request)
     {
-        // dd($request->toArray());
         ProductCategory::generalQuery()
                          ->where("id",$request->categoryId)
                          ->update(["category_name"=>$request->categoryName]);
 
         ProductSubcategory::generalQuery()
-                ->where("category_id",$request->categoryId)
-                ->update(["category_name"=>$request->categoryName]);
+                            ->where("category_id",$request->categoryId)
+                            ->update(["category_name"=>$request->categoryName]);
 
         Products::generalQuery()
                   ->where("category_id",$request->categoryId)
@@ -123,7 +122,98 @@ class ProductsController extends Controller
 
     public function editSubcategory(Request $request)
     {
+        $productSubcategory = ProductSubcategory::generalQuery()
+                                                  ->where("id",$request->subcategoryId)
+                                                  ->first();
 
+        $productSubcategory->subcategory_name = $request->subcategoryName;
+        $productSubcategory->save();
+
+        $productSubcategoryNameByCategory = ProductSubcategory::generalQuery()
+                                                                ->where("category_id",$productSubcategory->category_id)
+                                                                ->pluck("subcategory_name")
+                                                                ->toArray();
+
+        ProductCategory::generalQuery()
+                         ->where("id",$productSubcategory->category_id)
+                         ->update(["subcategory_name"=>count($productSubcategoryNameByCategory)?json_encode($productSubcategoryNameByCategory):null]);
+
+        ProductCategory::generalQuery()
+                         ->where("subcategory_id",$request->subcategoryId)
+                         ->update(["subcategory_name"=>$request->subcategoryName]);
+        
+    }
+
+    public function getProductsCategories()
+    {
+        $productCategory =  ProductCategory::generalQuery()
+                                             ->select(["id","category_name as text"])
+                                             ->get()
+                                             ->toArray();
+
+        return ["results"=>$productCategory];
+    }
+
+    public function getProductsSubcategories()
+    {
+        $productSubcategory =  ProductSubcategory::generalQuery()
+                                                   ->select(["id","subcategory_name as text"])
+                                                   ->get()
+                                                   ->toArray();
+
+        return ["results"=>$productSubcategory];
+    }
+
+    public function createNewProduct(Request $request)
+    {
+        $product = new Products;
+        $product->product_name = $request->productName;
+        $product->category_id = $request->categoryId;
+        $product->category_name = $request->categoryName;
+        if(isset($request->subcategoryId))
+        {
+            $product->subcategory_id = $request->subcategoryId;
+            $product->subcategory_name = $request->subcategoryName;
+        }
+
+        if(isset($request->colorVariation))
+        {
+            $product->color_variation = $request->colorVariation;
+        }
+        $product->price = $request->price;
+        $product->stock_count = $request->stockCount;
+        $product->status = $request->status?"active":"inactive";
+        $product->save();
+
+        $productCategory = ProductCategory::generalQuery()
+                                            ->where("id",$request->categoryId)
+                                            ->first();
+
+        $productCategory->product_id = $productCategory->product_id?array_merge($productCategory->product_id,[$product->id]):[$product->id];
+        $productCategory->product_name = $productCategory->product_name?array_merge($productCategory->product_name,[$product->product_name]):[$product->product_name];
+
+        $productCategory->product_id =  json_encode($productCategory->product_id);
+        $productCategory->product_name = json_encode($productCategory->product_name);
+        $productCategory->update();
+
+        if(isset($request->subcategoryId))
+        {
+            $productSubcategory = ProductSubcategory::generalQuery()
+                                                      ->where("id",$request->subcategoryId)
+                                                      ->first();
+
+            $productSubcategory->product_id = $productSubcategory->product_id?array_merge($productSubcategory->product_id,[$product->id]):[$product->id];
+            $productSubcategory->product_name = $productSubcategory->product_name?array_merge($productSubcategory->product_name,[$product->product_name]):[$product->product_name];
+    
+            $productSubcategory->product_id =  json_encode($productSubcategory->product_id);
+            $productSubcategory->product_name = json_encode($productSubcategory->product_name);
+            $productSubcategory->update();
+        }
+    }
+
+    public function getAllProducts()
+    {
+        return Products::generalQuery()->get();
     }
 
 }

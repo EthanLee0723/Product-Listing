@@ -2,33 +2,48 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 export default function ProductsPage() {
-    let testProducts = [];
+    // let testProducts = [];
 
-    for(let x = 0;x < 5;x++)
-    {
-        testProducts.push(<div key={x + 1} >
-            <div style={{background:'url("/images/products/product.jpg")',backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
-                </div>
-                <div>
-                    <label>Sample Product</label>
-                    <label>RM 10.99</label>
-                </div>
-            </div>);
-    }
+    // for(let x = 0;x < 5;x++)
+    // {
+    //     testProducts.push(<div key={x + 1} >
+    //         <div style={{background:'url("/images/products/product.jpg")',backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+    //             </div>
+    //             <div>
+    //                 <label>Sample Product</label>
+    //                 <label>RM 10.99</label>
+    //             </div>
+    //         </div>);
+    // }
 
-    testProducts = <>{testProducts}</>
+    // testProducts = <>{testProducts}</>
 
     const [productsCategories, setProductsCategories] = useState();
-    const [products,setProducts] = useState(testProducts);
+    const [products,setProducts] = useState();
 
-    if(!productsCategories)
-    {
+    useEffect(()=>{
         getProductsCategories();
-    }
+        $.ajax({
+            url: "/products/getAllProducts",
+            type: "get",
+            success:(data)=>{
+                const productsElements = data.map((val)=>{
+                    return <div key={val.id} >
+                                <div style={{background:'url("/images/products/product.jpg")',backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
+                                <div>
+                                    <label>{val.product_name}</label>
+                                    <label>RM {val.price}</label>
+                                </div>
+                            </div>
+                })
+                setProducts(<>{productsElements}</>)
+            }
+        })
+    },[])
 
     return (
         <>
