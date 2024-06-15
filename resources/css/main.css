@@ -2,6 +2,7 @@
 {
     --colorPrimary: rgb(238, 102, 26);
     --colorPrimaryHover: rgba(238, 102, 26, .8);
+    --colorLightGray: rgb(246, 244, 244);
 }
 
 a
@@ -242,17 +243,41 @@ svg.fa-pen,svg.fa-trash-can
     {
         padding: .5rem 2rem;
         border-bottom: 1px solid lightgray;
-        cursor: pointer;
+        text-wrap: nowrap;
 
-        &:hover
+        &.divAdminSidebarTitle
         {
-            background-color: lightgray;
+            color: white;
+            background-color: var(--colorPrimary);
+            font-weight: bold;
+
         }
 
-        &:active
+        &:not(.divAdminSidebarTitle)
         {
-            background-color: gray;
+            cursor: pointer;
+
+            & > svg
+            {
+                margin-right: 1rem;
+            }
+
+            &:hover
+            {
+                background-color: lightgray;
+            }
+
+            &:active
+            {
+                background-color: gray;
+            }
+
+            &:last-of-type
+            {
+                color: rgb(255, 55, 55);
+            }
         }
+        
     }
 
     &.expanded
@@ -738,6 +763,26 @@ svg.fa-pen,svg.fa-trash-can
     }
 }
 
+.btnTransparent
+{
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: black;
+    padding: .25rem .5rem;
+    border-radius: 4px;
+    transition: background-color .1s;
+    
+    &:is(:hover,:active)
+    {
+        background-color: var(--colorLightGray);
+
+        &:active
+        {
+            background-color: lightgray;
+        }
+    }
+}
+
 .divDropdown
 {   
     position: relative;
@@ -787,7 +832,7 @@ svg.fa-pen,svg.fa-trash-can
     position: relative;
     margin-bottom: 1rem;
 
-    & input
+    & input,textarea
     {
         padding: 1.5rem 1rem .5rem 1rem;
         border: 0.8px solid rgb(226, 226, 226);
@@ -801,6 +846,7 @@ svg.fa-pen,svg.fa-trash-can
             font-size: 12px;
             color: rgb(201, 79, 10);
             top: 8px;
+            background-color: white;
         }
     }
 
@@ -812,6 +858,86 @@ svg.fa-pen,svg.fa-trash-can
         top: calc(50% / 2);
         font-size: 18px;
         transition: all 0.15s ease 0s;
+    }
+}
+
+.divColorVarContainer
+{
+    margin-top: 1.5rem;
+}
+
+.divInputSectionContainer
+{
+    border-radius: 4px;
+    border: 0.8px solid rgb(226, 226, 226);
+    padding: .5rem;
+    position: relative;
+    margin-bottom: 1.5rem;
+
+    & > label
+    {
+        position: absolute;
+        color: rgb(201, 79, 10);
+        top: -15px;
+        background-color: white;
+        padding: 0 .5rem;
+        left: .5rem;
+    }
+
+    & .divColorSelectionInputSection
+    {
+        display: flex;
+        gap: 1rem;
+
+        & .inputPlaceholderContainer
+        {
+            flex-basis: 50%;
+
+            & input[type="color"]
+            {
+                height: 100%;
+                padding-top: 1.6rem;
+                background-color: white;
+            }
+        }
+    }
+
+    & .divInputSection
+    {
+        border-radius: 4px;
+        position: relative;
+        padding: 2rem .5rem .5rem .5rem;
+        cursor: pointer;
+
+        &:hover
+        {
+            background-color: var(--colorLightGray);
+            box-shadow: 0 0 5px gray;
+
+            & svg
+            {
+                display: block;
+            }
+        }
+
+        & svg{
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            display: none;
+        }
+    }
+}
+
+.divProductImgUploadImgContainer
+{  
+    display: flex;
+    gap: 1rem;
+
+    & > div
+    {
+        background-color: lightgray;
+        flex-basis: ;
     }
 }
 

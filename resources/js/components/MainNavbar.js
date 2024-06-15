@@ -18,9 +18,9 @@ export default function MainNavbar() {
                             <div id='mainNavbarContent'>
                                 <a href="/home">Home</a>
                                 <a href="/about">About</a>
+                                <a href="/products">Products</a>
                                 <a href="/FAQ">FAQ</a>
                                 <a href="/contact">Contact Us</a>
-                                <a href="/products">Products</a>
                             </div>
                         </nav>
     

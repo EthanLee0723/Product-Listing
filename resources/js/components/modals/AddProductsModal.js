@@ -1,9 +1,80 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { useState } from 'react';
+import { faXmark,faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../../library/select2-4.1.0-rc.0/dist/css/select2.min.css';
 import '../../../library/select2-4.1.0-rc.0/dist/js/select2.min.js';
 
 export default function MdlAddProducts() {
+    const [colorVar, setColorVar] = useState([]);
+    const [productDetails,setProductDetails] = useState([]);
+    const [productTblDetails,setProductTblDetails] = useState([]);
+    const [productImg,setProductImg] =  useState([]);
+    const [productDetailsElement,setProductDetailsElement] = useState([]);
+    const [productTblDetailsElement,setProductTblDetailsElement] = useState([]);
+    const [colorVarElement,setColorVarElement] = useState([]);
+    const [productImgElement,setProductImgElement] = useState([]);
+
+    useEffect(()=>{
+        setColorVarElement(colorVar.map((val,ind)=>{
+            return <div key={ind} className='divInputSection divColorSelectionInputSection'>
+                        <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvColorVarRow(ind)}}/>
+                        <div className='inputPlaceholderContainer'>
+                            <input placeholder=' ' value={val.colorName} onChange={ev=>chgColorVarInput(ev,ind,"colorName")}></input>
+                            <label>Color Name</label>
+                        </div>
+                        <div className='inputPlaceholderContainer'>
+                            <input placeholder=' ' type='color' value={val.color} onChange={ev => chgColorVarInput(ev,ind,"color")}></input>
+                            <label>Color</label>
+                        </div>
+                    </div>
+        }));
+    },[colorVar]);
+
+    useEffect(()=>{
+        setProductDetailsElement(productDetails.map((val,ind)=>{
+            return <div key={ind} className='divInputSection'>
+                        <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvProductDetailsRow(ind)}}/>
+                        <div className='inputPlaceholderContainer'>
+                            <input placeholder=' ' value={val.title} onChange={ev=>chgProductDetailsInput(ev,ind,"title")}></input>
+                            <label>Title</label>
+                        </div>
+                        <div className='inputPlaceholderContainer'>
+                            <textarea placeholder=' ' value={val.content} onChange={ev=>chgProductDetailsInput(ev,ind,"content")}></textarea>
+                            <label>Content</label>
+                        </div>
+                    </div>
+        }));
+    },[productDetails]);
+
+    useEffect(()=>{
+        setProductTblDetailsElement(productTblDetails.map((val,ind)=>{
+            return <div key={ind} className='divInputSection'>
+                        <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvProductTblDetailsRow(ind)}}/>
+                        <div className='inputPlaceholderContainer'>
+                            <input placeholder=' ' value={val.title} onChange={ev=>chgProductTblDetailsInput(ev,ind,"title")}></input>
+                            <label>Title</label>
+                        </div>
+                        <div className='inputPlaceholderContainer'>
+                            <textarea placeholder=' ' value={val.content} onChange={ev=>chgProductTblDetailsInput(ev,ind,"content")}></textarea>
+                            <label>Content</label>
+                        </div>
+                    </div>
+        }));
+    },[productTblDetails]);
+
+    // useEffect(()=>{
+    //     setProductImgElement(productImg.map((val,ind)=>{
+    //         return <div key={ind} className='divColorSelectionInputSection'>
+    //                     <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvColorVarRow(ind)}}/>
+    //                     <div>
+    //                         <FontAwesomeIcon icon={faPlus} onClick={()=>{rmvColorVarRow(ind)}}/>
+    //                     </div>
+    //                 </div>
+    //     }));
+    // },[productImg]);
+
     $(()=>{
         $("#selProductsCategory").select2({
             ajax:{
@@ -31,7 +102,6 @@ export default function MdlAddProducts() {
 
     function createNewProduct()
     {
-        console.log( $("#selProductsCategory option:checked").text());
         $.ajax({
             url: "/manageProducts/createNewProduct",
             type: "post",
@@ -51,15 +121,98 @@ export default function MdlAddProducts() {
             }
         })
     }
+    
+    function addNewProductDetailsRow()
+    {
+        setProductDetails(productDetails.concat([{title:"",content:""}]));
+    }
+
+    function rmvProductDetailsRow(rowToRmv)
+    {
+        setProductDetails(productDetails.filter((val,ind)=>{
+            return ind !== rowToRmv;
+        }));
+    }
+
+    function chgProductDetailsInput(ev,rowIndToChg,inputType)
+    {
+        setProductDetails(productDetails.map((val,ind)=>{
+            if(ind === rowIndToChg)
+            {
+                val[inputType] = ev.target.value;
+                return val;
+            }
+            else
+            {
+                return val;
+            }
+        }))
+    }
+
+    function addNewProductTblDetailsRow()
+    {
+        setProductTblDetails(productTblDetails.concat([{title:"",content:""}]));
+    }
+
+    
+    function rmvProductTblDetailsRow(rowToRmv)
+    {
+        setProductTblDetails(productTblDetails.filter((val,ind)=>{
+            return ind !== rowToRmv;
+        }));
+    }
+
+    function chgProductTblDetailsInput(ev,rowIndToChg,inputType)
+    {
+        setProductTblDetails(productTblDetails.map((val,ind)=>{
+            if(ind === rowIndToChg)
+            {
+                val[inputType] = ev.target.value;
+                return val;
+            }
+            else
+            {
+                return val;
+            }
+        }))
+    }
+
+    function addNewColorVarRow()
+    {
+        setColorVar(colorVar.concat([{colorName:"",color:""}]));
+    }
+
+    
+    function rmvColorVarRow(rowToRmv)
+    {
+        setColorVar(colorVar.filter((val,ind)=>{
+            return ind !== rowToRmv;
+        }));
+    }
+
+    function chgColorVarInput(ev,rowIndToChg,inputType)
+    {
+        setColorVar(colorVar.map((val,ind)=>{
+            if(ind === rowIndToChg)
+            {
+                val[inputType] = ev.target.value;
+                return val;
+            }
+            else
+            {
+                return val;
+            }
+        }))
+    }
 
     return (
         <div id="mdlAddProducts" className="modal fade" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered  modal-dialog-scrollable">
                 <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title">Create Product</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                    <div className="modal-header">
+                        <h5 className="modal-title">Create Product</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div className="modal-body">
                         <div className='inputPlaceholderContainer'>
                             <input id="inCreateProductName" className='form-control' placeholder=' '></input>
@@ -81,21 +234,30 @@ export default function MdlAddProducts() {
                             <input id="inCreateProductStock" className='form-control' placeholder=' '></input>
                             <label>Stock count</label>
                         </div>
-                        {/* <div>
-                            <label>Product image</label>
-                        </div>
-                        <div>
+                        <div className='divColorVarContainer divInputSectionContainer'>
                             <label>Color variation</label>
-                            <button>+ Add</button>
+                            {colorVarElement}
+                            <button onClick={addNewColorVarRow} className='btnTransparent'>+ Add</button>
                         </div>
-                        <div>
-                            <label>Product details</label>
-                            <button>+ Add</button>
+                        <div className='divInputSectionContainer'>
+                            <label>Product Details</label>
+                            {productDetailsElement}
+                            <button onClick={addNewProductDetailsRow} className='btnTransparent'>+ Add</button>
                         </div>
-                        <div>
-                            <label>Product table details</label>
-                            <button>+ Add</button>
-                        </div> */}
+                        <div className='divInputSectionContainer'>
+                            <label> Product Table Details</label>
+                            {productTblDetailsElement}
+                            <button onClick={addNewProductTblDetailsRow} className='btnTransparent'>+ Add</button>
+                        </div>
+                        <div className='divInputSectionContainer'>
+                            <label>Product Image</label>
+                            <div className='divProductImgUploadImgContainer'>
+                                <div for="#inProductImgUpload" onClick={()=>{$("#inProductImgUpload").click()}}>
+                                    <FontAwesomeIcon icon={faPlus}/>
+                                    <input id="inProductImgUpload" type='file' accept='image/*' hidden></input>
+                                </div>
+                            </div>
+                        </div>
                         <div className='d-flex align-items-center'>
                             <label className='me-2'>Status</label>
                             <label className='cbxOnOff'>

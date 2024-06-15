@@ -2,9 +2,9 @@
 
 @section("content")
     <div id="productsPage"></div>
-    <script>
+    {{-- <script>
         let data = {
             isAdmin: {!! Session::get("isAdmin") !!}
         }
-    </script>
+    </script> --}}
 @endsection

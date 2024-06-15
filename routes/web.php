@@ -93,3 +93,5 @@ Route::group(["prefix"=>"/products"],function()
 
     Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
 });
+
+Route::get("/logout","MainController@logout");

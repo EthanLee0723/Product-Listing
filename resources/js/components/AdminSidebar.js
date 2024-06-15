@@ -4,8 +4,19 @@ import ReactDOM from 'react-dom';
 export default function AdminSidebar() {
     return (<>
                 <div id="divAdminSidebar" className='collapsed'>
-                    <div onClick={()=>{window.location.href = "/manageProducts"}}>Products</div>
-                    <div onClick={()=>{window.location.href = "/manageCategories"}}>Categories</div>
+                    <div className='divAdminSidebarTitle'>Admin Dashboard</div>
+                    <div onClick={()=>{window.location.href = "/manageProducts"}}>
+                        <i className="fa-solid fa-box"></i>
+                        Products
+                    </div>
+                    <div onClick={()=>{window.location.href = "/manageCategories"}}>
+                        <i className="fa-solid fa-list"></i>
+                        Categories
+                    </div>
+                    <div onClick={()=>{window.location.href = "/logout"}}>
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </div>
                 </div>
                 <button id="btnAdminSidebar" className='collapsed'>
                     <i className="fa-solid fa-chevron-right"></i>
