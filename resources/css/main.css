@@ -936,8 +936,16 @@ svg.fa-pen,svg.fa-trash-can
 
     & > div
     {
-        background-color: lightgray;
-        flex-basis: ;
+        background-color: var(--colorLightGray);
+        flex-basis: calc(100% / 6);
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 3px gray;
+        border-radius: 4px;
+        z-index: 1;
     }
 }
 

@@ -252,9 +252,9 @@ export default function MdlAddProducts() {
                         <div className='divInputSectionContainer'>
                             <label>Product Image</label>
                             <div className='divProductImgUploadImgContainer'>
-                                <div for="#inProductImgUpload" onClick={()=>{$("#inProductImgUpload").click()}}>
+                                <div onClick={()=>{$("#inProductImgUpload").click()}}>
                                     <FontAwesomeIcon icon={faPlus}/>
-                                    <input id="inProductImgUpload" type='file' accept='image/*' hidden></input>
+                                    <input id="inProductImgUpload" type='file' accept='image/*' multiple  hidden></input>
                                 </div>
                             </div>
                         </div>
