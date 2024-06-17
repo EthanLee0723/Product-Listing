@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 
 class Products extends Model
@@ -11,6 +12,11 @@ class Products extends Model
     protected $primaryKey = "id";
     const CREATED_AT = "created_at";
     const UPDATED_AT = "updated_at";
+
+    public function  getCreatedAtAttribute($val)
+    {
+        return Carbon::parse($val)->toDateTimeString();
+    }
 
     public function scopeGeneralQuery($query)
     {

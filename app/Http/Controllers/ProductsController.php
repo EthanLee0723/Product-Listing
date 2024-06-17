@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ProductCategory;
 use App\Models\ProductSubcategory;
+use Carbon\Carbon;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -178,10 +180,36 @@ class ProductsController extends Controller
 
         if(isset($request->colorVariation))
         {
-            $product->color_variation = $request->colorVariation;
+            $product->color_variation = json_encode($request->colorVariation);
         }
         $product->price = $request->price;
         $product->stock_count = $request->stockCount;
+        if(isset($request->productDetails))
+        {
+            $product->product_details = json_encode($request->productDetails);
+        }
+
+        if(isset($request->productTblDetails))
+        {
+            $product->product_table_details = json_encode($request->productTblDetails);
+        }
+        
+        if(isset($request->productImg))
+        {
+            $request->productImg = array_map(function($val)
+            {
+                if(isset($val["imgName"]))
+                {
+                    return $val;
+                }
+                else
+                {
+                    return ["imgName"=>"product_".Carbon::now()->timestamp,"fileType"=>$val["fileType"]];
+                }
+            },$request->productImg);
+
+            $product->images = json_encode($request->productImg);
+        }
         $product->status = $request->status?"active":"inactive";
         $product->save();
 
@@ -213,7 +241,9 @@ class ProductsController extends Controller
 
     public function getAllProducts()
     {
-        return Products::generalQuery()->get();
+        return Products::generalQuery()
+                         ->select(DB::raw("CONVERT_TZ(created_at,'+00:00','+08:00') AS createdAt"),"id","product_name","category_name","subcategory_name","status")
+                         ->get();
     }
 
 }

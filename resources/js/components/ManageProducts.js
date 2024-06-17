@@ -28,13 +28,22 @@ export default function ManageProducts() {
             {
                 field: "status",
                 title: "Status",
+                formatter: (val,row) =>
+                {
+                    return `<label class='cbxOnOff'><input type='checkbox'${val === "active"?" checked":""}></label>`
+                }
             },
             {
-                field: "created_at",
+                field: "createdAt",
                 title: "Created date",
             },
             {
                 title: "Actions",
+                align: "center",
+                formatter: (val,row) =>
+                {
+                    return '<i class="fas fa-edit"></i>'
+                }
             }]
         });
 

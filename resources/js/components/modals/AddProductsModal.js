@@ -64,16 +64,14 @@ export default function MdlAddProducts() {
         }));
     },[productTblDetails]);
 
-    // useEffect(()=>{
-    //     setProductImgElement(productImg.map((val,ind)=>{
-    //         return <div key={ind} className='divColorSelectionInputSection'>
-    //                     <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvColorVarRow(ind)}}/>
-    //                     <div>
-    //                         <FontAwesomeIcon icon={faPlus} onClick={()=>{rmvColorVarRow(ind)}}/>
-    //                     </div>
-    //                 </div>
-    //     }));
-    // },[productImg]);
+    useEffect(()=>{
+        setProductImgElement(productImg.map((val,ind)=>{
+            return <div key={ind} className='divProductImgContainer'>
+                        <FontAwesomeIcon icon={faXmark} onClick={()=>{rmvProductImgRow(ind)}}/>
+                        <img src={val.data}></img>
+                    </div>
+        }));
+    },[productImg]);
 
     $(()=>{
         $("#selProductsCategory").select2({
@@ -114,7 +112,12 @@ export default function MdlAddProducts() {
                 subcategoryName: $("#selProductsSubcategory option:checked").text(),
                 price: $("#inCreateProductPrice").val(),
                 stockCount: $("#inCreateProductStock").val(),
-                status: $("#inCreateProductStatus").is(":checked")
+                status: $("#inCreateProductStatus").is(":checked"),
+                colorVar:  rmvEmptyInputData(colorVar,true),
+                productDetails: rmvEmptyInputData(productDetails),
+                productTblDetails: rmvEmptyInputData(productTblDetails),
+                productImg: productImg
+
             },
             success:()=>{
                 window.location.reload();
@@ -179,7 +182,7 @@ export default function MdlAddProducts() {
 
     function addNewColorVarRow()
     {
-        setColorVar(colorVar.concat([{colorName:"",color:""}]));
+        setColorVar(colorVar.concat([{colorName:"",color:"#000000"}]));
     }
 
     
@@ -203,6 +206,53 @@ export default function MdlAddProducts() {
                 return val;
             }
         }))
+    }
+
+    async function chgProductImg(ev)
+    {
+        setProductImg(productImg.concat(await Promise.all(Array.from(ev.target.files).map(async (val,ind)=>{
+            let productImg = await convertFileToBase64(val)
+            return {data: productImg,fileType: val.type.split("/").at(-1),isExist: false};
+        }))));
+
+    }
+
+    function rmvProductImgRow(rowToRmv)
+    {
+        setProductImg(productImg.filter((val,ind)=>{
+            return ind !== rowToRmv;
+        }));
+    }
+    
+    function convertFileToBase64(file,fo) {
+        return new Promise((resolve,reject)=>{
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        })
+        
+    }
+
+    function rmvEmptyInputData(arrInput,allInputRequred = false)
+    {
+        return arrInput.filter((val,ind)=>{
+            let toInclude = allInputRequred;
+            for(let [key,val] of Object.entries(val))
+            {
+                if(!allInputRequred && val)
+                {
+                    toInclude = true;
+                    break;
+                }
+                else if(allInputRequred && !val)
+                {
+                    toInclude = false;
+                    break;
+                }
+            }
+            return toInclude;
+        })
     }
 
     return (
@@ -252,9 +302,10 @@ export default function MdlAddProducts() {
                         <div className='divInputSectionContainer'>
                             <label>Product Image</label>
                             <div className='divProductImgUploadImgContainer'>
+                                {productImgElement}
                                 <div onClick={()=>{$("#inProductImgUpload").click()}}>
                                     <FontAwesomeIcon icon={faPlus}/>
-                                    <input id="inProductImgUpload" type='file' accept='image/*' multiple  hidden></input>
+                                    <input id="inProductImgUpload" type='file' accept='image/*' multiple onChange={chgProductImg}  hidden></input>
                                 </div>
                             </div>
                         </div>

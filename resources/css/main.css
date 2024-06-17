@@ -175,7 +175,12 @@ svg.fa-pen,svg.fa-trash-can
     width: 85vw;
     display: flex;
     justify-content: center;
-    padding: 2rem 0;
+    padding: 2rem;
+
+    & .bootstrap-table
+    {
+        width: 100%
+    }
 }
 
 #divManageCategoriesContainer
@@ -933,6 +938,7 @@ svg.fa-pen,svg.fa-trash-can
 {  
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 
     & > div
     {
@@ -943,9 +949,33 @@ svg.fa-pen,svg.fa-trash-can
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        box-shadow: 0 0 3px gray;
+        box-shadow: 0 0 1px gray;
         border-radius: 4px;
         z-index: 1;
+        padding: .5rem;
+        position: relative;
+
+        &:hover
+        {
+            & svg.fa-xmark
+            {
+                display: block;
+            }
+        }
+
+        & svg.fa-xmark
+        {
+            position:absolute;
+            top: .25rem;
+            right: .25rem;
+            display: none;
+
+        }
+
+        & img
+        {
+            width: 100%;
+        }
     }
 }
 
