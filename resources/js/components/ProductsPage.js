@@ -28,12 +28,12 @@ export default function ProductsPage() {
     useEffect(()=>{
         getProductsCategories();
         $.ajax({
-            url: "/products/getAllProducts",
+            url: "/products/getActiveProducts",
             type: "get",
             success:(data)=>{
                 const productsElements = data.map((val)=>{
-                    return <div key={val.id} >
-                                <div style={{background:'url("/images/products/product.jpg")',backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
+                    return <div key={val.id} onClick={()=>{window.location.href = "/products/productDetails/"+val.id}}>
+                                <div style={{background:`url("/images/products/${JSON.parse(val.images)[0].imgName}")`,backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
                                 <div>
                                     <label>{val.product_name}</label>
                                     <label>RM {val.price}</label>
@@ -59,7 +59,7 @@ export default function ProductsPage() {
                     </div>
                     <div>
                         <div id='divSearchSort'>
-                            <div>
+                            <div className='divSearchBar'>
                                 <input className='form-control' placeholder='Search...'></input>
                                 <button className='btn btnPrimary'>
                                     <i className="fa-solid fa-magnifying-glass"></i>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Products;
 use App\Models\ProductCategory;
 use App\Models\ProductSubcategory;
@@ -204,7 +205,10 @@ class ProductsController extends Controller
                 }
                 else
                 {
-                    return ["imgName"=>"product_".Carbon::now()->timestamp,"fileType"=>$val["fileType"]];
+                    $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
+                    $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
+                    Storage::disk('product_img')->put($fileName, $decoded_image);   
+                    return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
                 }
             },$request->productImg);
 
@@ -242,8 +246,26 @@ class ProductsController extends Controller
     public function getAllProducts()
     {
         return Products::generalQuery()
-                         ->select(DB::raw("CONVERT_TZ(created_at,'+00:00','+08:00') AS createdAt"),"id","product_name","category_name","subcategory_name","status")
+                         ->select("*")
+                         ->addSelect(DB::raw("CONVERT_TZ(created_at,'+00:00','+08:00') AS createdAt"))
                          ->get();
+    }
+
+    public function getActiveProducts()
+    {
+        return Products::generalQuery()
+                         ->where("status","active")
+                         ->get();
+    }
+
+    public function getProductDetails(Request $request,$prdId)
+    {
+        $prdDetails = Products::generalQuery()
+                                ->where("status","active")
+                                ->where("id",$prdId)
+                                ->first();
+
+        return view("productsDetailsPage",["prdDetails"=>$prdDetails]);
     }
 
 }
