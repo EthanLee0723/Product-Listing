@@ -736,13 +736,89 @@ svg.fa-pen,svg.fa-trash-can
     }
 }
 
+.displayImg
+{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .divPrdDetailsContainer
 {
     display: flex;
+    padding: 0 3.1vw;
+    min-height: 300px;
+    height: 80vh;
 
     & > div
     {
         flex: 1 0 50%;
+
+        &.divPrdDetailsImgContainer
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            & > div:nth-of-type(2)
+            {
+                flex-basis: 75%;
+                position: relative;
+                overflow: hidden;
+                height: 100%;
+
+                & > div
+                {
+                    position: absolute;
+                    height: 100%;
+                    display: flex;
+                    transition: left .5s;
+
+                    & > div
+                    {
+                        height: 100%;
+                    }
+                }
+            }
+
+            & > div:nth-of-type(3)
+            {
+                flex-basis: 15%;
+                min-height: 50px;
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                padding-bottom: .25rem;
+
+                &::-webkit-scrollbar {
+                    height: 1px;
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                    background: #888; 
+                }
+
+                & > div
+                {
+                    cursor: pointer;
+                    aspect-ratio: 1 / 1;
+                    border: 1px solid rgb(206, 212, 218);
+                    opacity: .5;
+                    flex-grow: 1;
+
+                    &:hover
+                    {
+                        opacity: 1;
+                    }
+
+                    &.selected
+                    {
+                        opacity: 1;
+                        border-radius: var(--colorPrimary);
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -772,7 +848,7 @@ svg.fa-pen,svg.fa-trash-can
 
     & > div
     {
-        width: 50%;
+        width: 55.1%;
         
         & > div
         {
@@ -802,7 +878,7 @@ svg.fa-pen,svg.fa-trash-can
 
     & > div
     {
-        width: 50%;
+        width: 55.1%;
     }
 }
 
