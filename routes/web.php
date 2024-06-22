@@ -47,6 +47,10 @@ Route::group(["prefix"=>"manageProducts"],function()
     Route::get("/getAllProducts","ProductsController@getAllProducts");
 
     Route::post("/createNewProduct","ProductsController@createNewProduct");
+
+    Route::post("/updatePrd","ProductsController@updatePrd");
+
+    Route::post("/delPrd","ProductsController@delPrd");
 });
 
 Route::group(["prefix"=>"/manageCategories"],function()

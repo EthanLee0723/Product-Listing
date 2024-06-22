@@ -173,48 +173,30 @@ class ProductsController extends Controller
         $product->product_name = $request->productName;
         $product->category_id = $request->categoryId;
         $product->category_name = $request->categoryName;
-        if(isset($request->subcategoryId))
-        {
-            $product->subcategory_id = $request->subcategoryId;
-            $product->subcategory_name = $request->subcategoryName;
-        }
-
-        if(isset($request->colorVariation))
-        {
-            $product->color_variation = json_encode($request->colorVariation);
-        }
+        $product->subcategory_id = isset($request->subcategoryId)?$request->subcategoryId:null;
+        $product->subcategory_name = isset($request->subcategoryId)?$request->subcategoryName:null;
+        $product->color_variation = isset($request->colorVariation)? json_encode($request->colorVariation):null;
         $product->price = $request->price;
         $product->stock_count = $request->stockCount;
-        if(isset($request->productDetails))
-        {
-            $product->product_details = json_encode($request->productDetails);
-        }
+        $product->product_details = isset($request->productDetails)?json_encode($request->productDetails):null;
+        $product->product_table_details = isset($request->productTblDetails)?json_encode($request->productTblDetails):null;
 
-        if(isset($request->productTblDetails))
+        $product->images= isset($request->productImg)?json_encode(array_map(function($val)
         {
-            $product->product_table_details = json_encode($request->productTblDetails);
-        }
-        
-        if(isset($request->productImg))
-        {
-            $request->productImg = array_map(function($val)
+            if(isset($val["isExist"]) === "true")
             {
-                if(isset($val["imgName"]))
-                {
-                    return $val;
-                }
-                else
-                {
-                    $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
-                    $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
-                    Storage::disk('product_img')->put($fileName, $decoded_image);   
-                    return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
-                }
-            },$request->productImg);
+                return $val;
+            }
+            else
+            {
+                $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
+                $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
+                Storage::disk('product_img')->put($fileName, $decoded_image);   
+                return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
+            }
+        },$request->productImg)):null;
 
-            $product->images = json_encode($request->productImg);
-        }
-        $product->status = $request->status?"active":"inactive";
+        $product->status = $request->status === "true"?"active":"inactive";
         $product->save();
 
         $productCategory = ProductCategory::generalQuery()
@@ -241,6 +223,203 @@ class ProductsController extends Controller
             $productSubcategory->product_name = json_encode($productSubcategory->product_name);
             $productSubcategory->update();
         }
+    }
+
+    public function updatePrd(Request $request)
+    {
+        $product = Products::generalQuery()
+                             ->where("id",$request->productId)
+                             ->first();
+
+        $productCategory = ProductCategory::generalQuery()
+                                            ->where("id",$product->category_id)
+                                            ->first();
+
+        $productSubcategory = isset($request->subcategoryId)?ProductSubcategory::generalQuery()
+                                                                                 ->where("id",$product->subcategory_id)
+                                                                                 ->first():null;
+
+        $product->product_name = $request->productName;
+        $product->category_id = $request->categoryId;
+        $product->category_name = $request->categoryName;
+        $product->subcategory_id = isset($request->subcategoryId)?$request->subcategoryId:null;
+        $product->subcategory_name = isset($request->subcategoryId)?$request->subcategoryName:null;
+        $product->color_variation = isset($request->colorVariation)? json_encode($request->colorVariation):null;
+        $product->price = $request->price;
+        $product->stock_count = $request->stockCount;
+        $product->product_details = isset($request->productDetails)?json_encode($request->productDetails):null;
+        $product->product_table_details = isset($request->productTblDetails)?json_encode($request->productTblDetails):null;
+        
+        
+        $existedImg = $request->productImg?array_filter($request->productImg,function($val){
+            return $val["isExist"] === "true";
+        }):[];
+
+        if($product->images)
+        {
+            foreach($product->images as $ind=>$img)
+            {
+                
+                if(array_search($img,$existedImg,true) === false)
+                {
+                    Storage::disk("product_img")->delete($img["imgName"]);
+                }
+            }
+        }
+
+        $product->images= isset($request->productImg)?json_encode(array_map(function($val)
+        {
+            if(isset($val["isExist"]) === "true")
+            {
+                return $val;
+            }
+            else
+            {
+                $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
+                $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
+                Storage::disk('product_img')->put($fileName, $decoded_image);   
+                return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
+            }
+        },$request->productImg)):null;
+
+        $product->status = $request->status === "true"?"active":"inactive";
+        $product->update();
+
+        if($productCategory->id !== $product->category_id)
+        {
+            $productCategory->product_id = array_filter($productCategory->product_id,function($val) use ($product)
+            {
+                return $val !== $product->id;
+            });
+
+            $productCategory->product_name = array_filter($productCategory->product_name,function($val) use ($product)
+            {
+                return $val !== $product->product_name;
+            });
+
+            $productCategory->product_id = $productCategory->product_id?json_encode($productCategory->product_id):null;
+            $productCategory->product_name = $productCategory->product_name?json_encode($productCategory->product_name):null;
+            $productCategory->update();
+            
+            $productCategory = ProductCategory::generalQuery()
+                                                ->where("id",$request->categoryId)
+                                                ->first();
+            $productCategory->product_id = $productCategory->product_id?array_merge($productCategory->product_id,[$product->id]):[$product->id];
+            $productCategory->product_name = $productCategory->product_name?array_merge($productCategory->product_name,[$product->product_name]):[$product->product_name];
+
+            $productCategory->product_id =  json_encode($productCategory->product_id);
+            $productCategory->product_name = json_encode($productCategory->product_name);
+            $productCategory->update();
+        }
+
+        if($productCategory->id !== $product->category_id)
+        {
+            $productCategory->product_id = array_filter($productCategory->product_id,function($val) use ($product)
+            {
+                return $val !== $product->id;
+            });
+
+            $productCategory->product_name = array_filter($productCategory->product_name,function($val) use ($product)
+            {
+                return $val !== $product->product_name;
+            });
+
+            $productCategory->product_id = $productCategory->product_id?json_encode($productCategory->product_id):null;
+            $productCategory->product_name = $productCategory->product_name?json_encode($productCategory->product_name):null;
+            $productCategory->update();
+            
+            $productCategory = ProductCategory::generalQuery()
+                                                ->where("id",$request->categoryId)
+                                                ->first();
+            $productCategory->product_id = $productCategory->product_id?array_merge($productCategory->product_id,[$product->id]):[$product->id];
+            $productCategory->product_name = $productCategory->product_name?array_merge($productCategory->product_name,[$product->product_name]):[$product->product_name];
+
+            $productCategory->product_id =  json_encode($productCategory->product_id);
+            $productCategory->product_name = json_encode($productCategory->product_name);
+            $productCategory->update();
+        }
+
+        if((!$productSubcategory && $product->subcategory_id) || ($productSubcategory && $productSubcategory->id !== $product->subcategory_id))
+        {
+            if($productSubcategory)
+            {
+                $productSubcategory->product_id = array_filter($productSubcategory->product_id,function($val) use ($product)
+                {
+                    return $val !== $product->id;
+                });
+    
+                $productSubcategory->product_name = array_filter($productSubcategory->product_name,function($val) use ($product)
+                {
+                    return $val !== $product->product_name;
+                });
+    
+                $productSubcategory->product_id = $productSubcategory->product_id?json_encode($productSubcategory->product_id):null;
+                $productSubcategory->product_name = $productSubcategory->product_name?json_encode($productSubcategory->product_name):null;
+                $productSubcategory->update();
+            }
+            
+            if($request->subcategoryId)
+            {
+                $productSubcategory = ProductSubcategory::generalQuery()
+                                                          ->where("id",$request->subcategoryId)
+                                                          ->first();
+                $productSubcategory->product_id = $productSubcategory->product_id?array_merge($productSubcategory->product_id,[$product->id]):[$product->id];
+                $productSubcategory->product_name = $productSubcategory->product_name?array_merge($productSubcategory->product_name,[$product->product_name]):[$product->product_name];
+
+                $productSubcategory->product_id =  json_encode($productSubcategory->product_id);
+                $productSubcategory->product_name = json_encode($productSubcategory->product_name);
+                $productSubcategory->update();
+            }
+        }
+    }
+
+    public function delPrd(Request $request)
+    {
+        $prdToDel = Products::generalQuery()
+                              ->where("id",$request->productId)
+                              ->first();
+        $prdToDel->deleted_at = now();
+
+        $prdCategory = ProductCategory::generalQuery()
+                                        ->where("id",$prdToDel->category_id)
+                                        ->first();
+
+        $prdCategory->product_id = array_filter($prdCategory->product_id,function($val) use ($prdToDel)
+        {
+            return $val !== $prdToDel->id;
+        });
+
+        $prdCategory->product_name = array_filter($prdCategory->product_name,function($val) use ($prdToDel)
+        {
+            return $val !== $prdToDel->product_name;
+        });
+
+        $prdCategory->product_id = $prdCategory->product_id?json_encode($prdCategory->product_id):null;
+        $prdCategory->product_name = $prdCategory->product_name?json_encode($prdCategory->product_name):null;
+        $prdCategory->update();
+
+        if($prdToDel->subcategory_id)
+        {
+            $prdSubcategory = ProductSubcategory::generalQuery()
+                                                  ->where("id",$prdToDel->subcategory_id)
+                                                  ->first();
+
+            $prdSubcategory->product_id = array_filter($prdSubcategory->product_id,function($val) use ($prdToDel)
+            {
+                return $val !== $prdToDel->id;
+            });
+    
+            $prdSubcategory->product_name = array_filter($prdSubcategory->product_name,function($val) use ($prdToDel)
+            {
+                return $val !== $prdToDel->product_name;
+            });
+            $prdSubcategory->product_id = $prdSubcategory->product_id?json_encode($prdSubcategory->product_id):null;
+            $prdSubcategory->product_name = $prdSubcategory->product_name?json_encode($prdSubcategory->product_name):null;
+            $prdSubcategory->update();
+        }
+
+        $prdToDel->update();
+        
     }
 
     public function getAllProducts()

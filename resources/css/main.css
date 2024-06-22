@@ -676,19 +676,29 @@ svg.fa-pen,svg.fa-trash-can
 {
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-between ;
+    margin-top: 2%;
+    gap: 10px;
 
     & > div
     {
-        flex-basis: 23.5%;
+        width: calc(25% - 7.5px);
         aspect-ratio: 7/8;
         border: 1px solid lightgray;
         display: flex;
         flex-direction: column;
         cursor: pointer;
         transition: all .5s;
-        margin-top: 2%;
         border-radius: 5px;
+
+        @media screen and (max-width: 800px) and (min-width: 601px)
+        {
+            width: calc(50% - 10px);
+        }
+
+        @media screen and (max-width: 600px)
+        {
+            width: 100%;
+        }
 
         &:hover
         {
@@ -749,6 +759,7 @@ svg.fa-pen,svg.fa-trash-can
     padding: 0 3.1vw;
     min-height: 300px;
     height: 80vh;
+    gap: 1.875rem;
 
     & > div
     {

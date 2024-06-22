@@ -6,21 +6,6 @@ import { useState, useEffect } from 'react';
 
 
 export default function ProductsPage() {
-    // let testProducts = [];
-
-    // for(let x = 0;x < 5;x++)
-    // {
-    //     testProducts.push(<div key={x + 1} >
-    //         <div style={{background:'url("/images/products/product.jpg")',backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
-    //             </div>
-    //             <div>
-    //                 <label>Sample Product</label>
-    //                 <label>RM 10.99</label>
-    //             </div>
-    //         </div>);
-    // }
-
-    // testProducts = <>{testProducts}</>
 
     const [productsCategories, setProductsCategories] = useState();
     const [products,setProducts] = useState();
@@ -33,7 +18,7 @@ export default function ProductsPage() {
             success:(data)=>{
                 const productsElements = data.map((val)=>{
                     return <div key={val.id} onClick={()=>{window.location.href = "/products/productDetails/"+val.id}}>
-                                <div style={{background:`url("/images/products/${JSON.parse(val.images)[0].imgName}")`,backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
+                                <div style={{background:`url("/images/products/${val.images?val.images[0].imgName:""}")`,backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
                                 <div>
                                     <label>{val.product_name}</label>
                                     <label>RM {val.price}</label>

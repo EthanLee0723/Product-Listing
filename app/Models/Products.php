@@ -18,6 +18,54 @@ class Products extends Model
         return Carbon::parse($val)->toDateTimeString();
     }
 
+    public function getColorVariationAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductDetailsAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductTableDetailsAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getImagesAttribute($val)
+    {
+        if($val)
+        {
+            return is_array($val)?$val:json_decode($val,true);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function scopeGeneralQuery($query)
     {
         return $this->query()

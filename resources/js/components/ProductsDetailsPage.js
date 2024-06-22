@@ -5,15 +5,15 @@ import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
 
 export default function ProductsDetailsPage() {
-    const prdViewImgElements = JSON.parse(prdDetails.images).map((val,ind)=>{
+    const prdViewImgElements = prdDetails.images?prdDetails.images.map((val,ind)=>{
         return <div key={ind} className='displayImg' style={{ backgroundImage: 'url("'+window.location.origin+'/images/products/'+val.imgName+'")' }} ></div>
-    })
+    }):[];
 
-    const prdViewImgSelectionElements = JSON.parse(prdDetails.images).map((val,ind)=>{
+    const prdViewImgSelectionElements = prdDetails.images?prdDetails.images.map((val,ind)=>{
         return <div key={ind} onClick={()=>{ viewSelectedImg(ind) }} className='displayImg' style={{ backgroundImage: 'url("'+window.location.origin+'/images/products/'+val.imgName+'")' }}></div>
-    })
+    }):[];
 
-    const prdDescriptionElement = JSON.parse(prdDetails.product_details).map((val,ind)=>{
+    const prdDescriptionElement = prdDetails.product_details?prdDetails.product_details.map((val,ind)=>{
         const arrContents = val.content.split(/(?:\r\n|\r|\n)/g)
         return <div key={ind}>
             <strong>{val.title}</strong>
@@ -26,14 +26,14 @@ export default function ProductsDetailsPage() {
                 ))}
             </div>
         </div>
-    })
+    }):[];
 
-    const prdTblDetailsElement = JSON.parse(prdDetails.product_table_details).map((val,ind)=>{
+    const prdTblDetailsElement = prdDetails.product_table_details?prdDetails.product_table_details.map((val,ind)=>{
         return <div key={ind}>
             <div>{val.title}</div>
             <div>{val.content}</div>
         </div>
-    })
+    }):[];
 
     $(window).resize(()=>{
         resizeDisplayImgImgWidth();
@@ -63,6 +63,19 @@ export default function ProductsDetailsPage() {
         return $(".divPrdDetailsImgContainer > div:nth-of-type(2)").width();
     }
 
+    function getColorVarElements()
+    {
+        if(prdDetails.color_variation)
+        {
+            return;
+        }
+    }
+
+    function whatsAppEnquiry()
+    {
+        window.location.href = "https://wa.me/+60182160332?text=sdjfidf";
+    }
+
     
 
     return (
@@ -87,7 +100,17 @@ export default function ProductsDetailsPage() {
                         </div>
                     </div>
                     <div>
-        
+                        <div>
+                            <a href='/products'>All products</a>
+                            {prdDetails.category_id && (<a href='/products?categoryId={prdDetails.category_id}'> / {prdDetails.category_name}</a>)}
+                            {prdDetails.subcategory_id && (<a href='/products?subcategoryId={prdDetails.subcategory_id}'> / {prdDetails.subcategory_name}</a>)}
+                            <a> / {prdDetails.product_name}</a>
+                        </div>
+                        <h1>{prdDetails.product_name}</h1>
+                        <div>{getColorVarElements()}</div>
+                        <button onClick={whatsAppEnquiry}>More Enquiry</button>
+                        <h3>RM {prdDetails.price}</h3>
+                        <div>Available: {prdDetails.stock_count} Units</div>
                     </div>
                 </div>
                 <div className='divPrdDescription'>
