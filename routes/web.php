@@ -95,7 +95,9 @@ Route::group(["prefix"=>"/products"],function()
     
     Route::post("/getProductsByFilter","ProductsController@getProductsByFilter");
 
-    Route::get("/getActiveProducts","ProductsController@getActiveProducts");
+    // Route::get("/getActiveProducts","ProductsController@getActiveProducts");
+
+    Route::get("/getActivePrdByFilter","ProductsController@getActivePrdByFilter");
 
     Route::post("/getProudctListingCategories","ProductsController@getProudctListingCategories");
 });

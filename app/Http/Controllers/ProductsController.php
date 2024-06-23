@@ -175,7 +175,7 @@ class ProductsController extends Controller
         $product->category_name = $request->categoryName;
         $product->subcategory_id = isset($request->subcategoryId)?$request->subcategoryId:null;
         $product->subcategory_name = isset($request->subcategoryId)?$request->subcategoryName:null;
-        $product->color_variation = isset($request->colorVariation)? json_encode($request->colorVariation):null;
+        $product->color_variation = isset($request->colorVar)? json_encode($request->colorVar):null;
         $product->price = $request->price;
         $product->stock_count = $request->stockCount;
         $product->product_details = isset($request->productDetails)?json_encode($request->productDetails):null;
@@ -238,7 +238,7 @@ class ProductsController extends Controller
         $product->category_name = $request->categoryName;
         $product->subcategory_id = isset($request->subcategoryId)?$request->subcategoryId:null;
         $product->subcategory_name = isset($request->subcategoryId)?$request->subcategoryName:null;
-        $product->color_variation = isset($request->colorVariation)? json_encode($request->colorVariation):null;
+        $product->color_variation = isset($request->colorVar)? json_encode($request->colorVar):null;
         $product->price = $request->price;
         $product->stock_count = $request->stockCount;
         $product->product_details = isset($request->productDetails)?json_encode($request->productDetails):null;
@@ -442,11 +442,46 @@ class ProductsController extends Controller
                          ->get();
     }
 
-    public function getActiveProducts()
+    public function getActivePrdByFilter(Request $request)
     {
-        return Products::generalQuery()
-                         ->where("status","active")
-                         ->get();
+        $products = Products::generalQuery()
+                              ->where("status","active");
+
+        if(isset($request->subcatId))
+        {
+            $products->where("subcategory_id",$request->subcatId);
+        }
+        else if($request->catId !== "0")
+        {
+            $products->where("category_id",$request->catId);
+        }
+        
+        if($request->searchTxt)
+        {
+            $products->where(function($query) use ($request)
+            {
+                $query->where("product_name","LIKE",'%'.$request->searchTxt.'%')
+                      ->orWhere("price","LIKE",'%'.$request->searchTxt.'%');
+            });
+        }
+
+        switch($request->sortBy)
+        {
+            case "newArrivals":
+                $products->orderBy("created_at","desc");
+                break;
+            case "name":
+                $products->orderBy("product_name","asc");
+                break;
+            case "priceLowToHigh":
+                $products->orderBy("price","asc");
+                break;
+            case "priceHighToLow":
+                $products->orderBy("price","desc");
+                break;
+        }
+
+        return $products->get();
     }
 
     public function getProductDetails(Request $request,$prdId)

@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import { useEffect,useState } from 'react';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 export default function ProductsDetailsPage() {
+    const [searchTxt,setSearchTxt] = useState("");
     const prdViewImgElements = prdDetails.images?prdDetails.images.map((val,ind)=>{
         return <div key={ind} className='displayImg' style={{ backgroundImage: 'url("'+window.location.origin+'/images/products/'+val.imgName+'")' }} ></div>
     }):[];
@@ -67,16 +70,25 @@ export default function ProductsDetailsPage() {
     {
         if(prdDetails.color_variation)
         {
-            return;
+            const colorvarElements = prdDetails.color_variation.map((val,ind)=>{
+                return <div key={ind} style={{backgroundColor: val.color}}></div>
+            })
+
+            return <div className='prdDetailsColorVarSection'>
+                <div><label>Color</label><hr></hr></div>
+                <div>{colorvarElements}</div>
+            </div>
+        }
+        else 
+        {
+            return null;
         }
     }
 
     function whatsAppEnquiry()
     {
-        window.location.href = "https://wa.me/+60182160332?text=sdjfidf";
+        window.location.href = "https://wa.me/+60182160332";
     }
-
-    
 
     return (
         <>
@@ -85,8 +97,8 @@ export default function ProductsDetailsPage() {
                 <div className='divPrdDetailsContainer'>
                     <div className='divPrdDetailsImgContainer'>
                         <div className='divSearchBar'>
-                            <input className='form-control' placeholder='Search...'></input>
-                            <button className='btn btnPrimary'>
+                            <input className='form-control' onChange={ ev=>setSearchTxt(ev.target.value) } value={searchTxt} placeholder='Search...'></input>
+                            <button onClick={ ()=>window.location.href = "/products?searchTxt="+searchTxt } className='btn btnPrimary'>
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
@@ -100,17 +112,22 @@ export default function ProductsDetailsPage() {
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div className='divDetailLinks'>
                             <a href='/products'>All products</a>
-                            {prdDetails.category_id && (<a href='/products?categoryId={prdDetails.category_id}'> / {prdDetails.category_name}</a>)}
-                            {prdDetails.subcategory_id && (<a href='/products?subcategoryId={prdDetails.subcategory_id}'> / {prdDetails.subcategory_name}</a>)}
-                            <a> / {prdDetails.product_name}</a>
+                            {prdDetails.category_id && (<a href={'/products?categoryId='+prdDetails.category_id}>{prdDetails.category_name}</a>)}
+                            {prdDetails.subcategory_id && (<a href={'/products?subcategoryId='+prdDetails.subcategory_id}>{prdDetails.subcategory_name}</a>)}
+                            <a>{prdDetails.product_name}</a>
                         </div>
                         <h1>{prdDetails.product_name}</h1>
                         <div>{getColorVarElements()}</div>
-                        <button onClick={whatsAppEnquiry}>More Enquiry</button>
-                        <h3>RM {prdDetails.price}</h3>
-                        <div>Available: {prdDetails.stock_count} Units</div>
+                        <div className='divPrdDetails'>
+                            <h3>RM {prdDetails.price}</h3>
+                            <div>Available: {prdDetails.stock_count} Units</div>
+                            <button className='btn' onClick={whatsAppEnquiry}>
+                                <FontAwesomeIcon icon={faWhatsapp} style={{color: "#ffffff",}} />
+                                More Enquiry
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className='divPrdDescription'>

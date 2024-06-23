@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
-
+import { useState } from 'react';
+import { Toast } from './GeneralComponents';
 
 
 export default function HomePage() {
 
+    
     return (
         <>
             <MainNavbar/>
@@ -49,10 +51,12 @@ export default function HomePage() {
                             <input placeholder=" "></input>
                             <label>Email Address</label>
                         </div>
-                        <a className='btnOrange'>Sign up</a>
+                        <a onClick={ signUpNewsletter } className='btnOrange'>Sign up</a>
                     </div>
                 </div>
             </div>
+            <Toast />
+            {}
             <MainFooter/>
         </>
     );
