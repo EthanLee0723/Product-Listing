@@ -30,9 +30,9 @@ export default function ManageProducts() {
                 {
                     field: "status",
                     title: "Status",
-                    formatter: (val,row) =>
+                    formatter: (val,row,ind) =>
                     {
-                        return `<label class='cbxOnOff'><input type='checkbox'${val === "active"?" checked":""}></label>`
+                        return `<label class='cbxOnOff'><input data-row-ind=${ind} class="cbxPrdStatus" type='checkbox'${val === "active"?" checked":""}></label>`
                     }
                 },
                 {
@@ -56,6 +56,16 @@ export default function ManageProducts() {
         }
 
         $("#tblManageProducts").bootstrapTable('hideLoading')
+    })
+
+    $(document).on("change","#tblManageProducts tbody tr td .cbxPrdStatus",(ev)=>{
+        $.ajax({
+            url: "/manageProducts/prdStatusChg",
+            type: "post",
+            headers: { 'X-CSRF-TOKEN': _token },
+            data: { prdId: $("#tblManageProducts").bootstrapTable('getData')[$(ev.currentTarget).data('row-ind')] }
+
+        })
     })
 
     $(document).on("click","#btnCreateNewProduct",(ev)=>{

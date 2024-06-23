@@ -9,6 +9,12 @@ export default function ProductsPage() {
 
     const [productsCategories, setProductsCategories] = useState();
     const [products,setProducts] = useState();
+    const [filter,setFilter] = useState({
+                                    search: "",
+                                    sortBy: "newArrivals",
+                                    categoryId: 0,
+                                    subcategoryId: null 
+                                });
 
     useEffect(()=>{
         getProductsCategories();
@@ -29,6 +35,65 @@ export default function ProductsPage() {
             }
         })
     },[])
+
+    function getProductsCategories()
+    {
+        let arrProductsCategories = [{
+            id: 0,
+            category_name: "All products"
+        }]
+
+        $.ajax({
+            url: "/products/getProudctListingCategories",
+            type: "post",
+            headers: { "X-CSRF-TOKEN": _token },
+            success:(data)=>{
+                arrProductsCategories = arrProductsCategories.concat(data);
+                let htmlProductCategories = arrProductsCategories.map((val,ind)=>{
+                    let htmlSubCategories = [];
+                    if(val.subcategory_name)
+                    {
+                        val.subcategory_name.forEach((value,ind)=>{
+                            htmlSubCategories.push(<div className='divSubcategorySection' key={val.subcategory_id[ind]}>
+                                <input checked={filter.subcategoryId === val.subcategory_id[ind]}  id={"subcategory"+val.subcategory_id[ind]} type='radio' name ="productCategory"></input>
+                                <label htmlFor={"subcategory"+val.subcategory_id[ind]}>{value}</label>
+                            </div>)
+                        })
+
+                        htmlSubCategories = <>
+                            <i className="fa-solid fa-chevron-right"></i><div className="collapsed">{htmlSubCategories}</div>
+                        </>
+                    }
+
+                    return <div key={val.id} className='divCategorySection' data-category-id={val.id}>
+                        <input checked={filter.subcategoryId === null && filter.categoryId === val.id} id={"category"+val.id} type='radio' name="productCategory"></input>
+                        <label htmlFor={"category"+val.id}>{val.category_name}</label>
+                        {htmlSubCategories}
+                    </div>
+                })
+
+                setProductsCategories(htmlProductCategories);
+            }
+        })
+
+    }
+
+    function filterByCat(catId,catType = 'category')
+    {
+        let filterByCat = filter;
+        if(catType === "category")
+        {
+            filterByCat.categoryId = catId;
+            filterByCat.subcategoryId = null;
+        }
+        else
+        {
+            filterByCat.subcategoryId = catId;
+            filterByCat.categoryId = null;
+        }
+
+        setFilter(filterByCat);
+    }
 
     return (
         <>
@@ -71,48 +136,6 @@ export default function ProductsPage() {
             <MainFooter/>
         </>
     );
-
-    function getProductsCategories()
-    {
-        let arrProductsCategories = [{
-            id: 0,
-            category_name: "All products"
-        }]
-
-        $.ajax({
-            url: "/products/getProudctListingCategories",
-            type: "post",
-            headers: { "X-CSRF-TOKEN": _token },
-            success:(data)=>{
-                arrProductsCategories = arrProductsCategories.concat(data);
-                let htmlProductCategories = arrProductsCategories.map((val,ind)=>{
-                    let htmlSubCategories = [];
-                    if(val.subcategory_name)
-                    {
-                        val.subcategory_name.forEach((value,ind)=>{
-                            htmlSubCategories.push(<div key={val.subcategory_id[ind]}>
-                                <input id={"subcategory"+val.subcategory_id[ind]} type='radio' name ="productCategory"></input>
-                                <label htmlFor={"subcategory"+val.subcategory_id[ind]}>{value}</label>
-                            </div>)
-                        })
-
-                        htmlSubCategories = <>
-                            <i className="fa-solid fa-chevron-right"></i><div className="collapsed">{htmlSubCategories}</div>
-                        </>
-                    }
-
-                    return <div key={val.id} data-category-id={val.id}>
-                        <input id={"category"+val.id} type='radio' name="productCategory"></input>
-                        <label htmlFor={"category"+val.id}>{val.category_name}</label>
-                        {htmlSubCategories}
-                    </div>
-                })
-
-                setProductsCategories(htmlProductCategories);
-            }
-        })
-
-    }
 }
 
 $(document).on("click","#divProductCategoriesSidebar svg.fa-chevron-right,svg.fa-chevron-down",(ev)=>{

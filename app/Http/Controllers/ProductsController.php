@@ -183,17 +183,11 @@ class ProductsController extends Controller
 
         $product->images= isset($request->productImg)?json_encode(array_map(function($val)
         {
-            if(isset($val["isExist"]) === "true")
-            {
-                return $val;
-            }
-            else
-            {
-                $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
-                $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
-                Storage::disk('product_img')->put($fileName, $decoded_image);   
-                return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
-            }
+            $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
+            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
+            Storage::disk('product_img')->put($fileName, $decoded_image);   
+            return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
+
         },$request->productImg)):null;
 
         $product->status = $request->status === "true"?"active":"inactive";
@@ -255,33 +249,33 @@ class ProductsController extends Controller
             return $val["isExist"] === "true";
         }):[];
 
+        $existedImg = array_map(function($val){
+            return $val["imgName"];
+        },$existedImg);
+
         if($product->images)
         {
+            $array = [];
             foreach($product->images as $ind=>$img)
             {
-                
-                if(array_search($img,$existedImg,true) === false)
+                if(array_search($img["imgName"],$existedImg) === false)
                 {
                     Storage::disk("product_img")->delete($img["imgName"]);
                 }
             }
         }
-
-        $product->images= isset($request->productImg)?json_encode(array_map(function($val)
+        
+        $array = [];
+        $product->images = isset($request->productImg)?json_encode(array_map(function($val) use ($array)
         {
-            if(isset($val["isExist"]) === "true")
-            {
-                return $val;
-            }
-            else
-            {
+            if($val["isExist"] !== "true")
+            {  
                 $fileName = "product_".Carbon::now()->format("dmYHisu").".".$val["fileType"];
                 $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $val["data"]));
-                Storage::disk('product_img')->put($fileName, $decoded_image);   
-                return ["imgName"=>$fileName,"fileType"=>$val["fileType"]];
+                Storage::disk('product_img')->put($fileName, $decoded_image);  
             }
+            return ["imgName"=>$val["isExist"] === "true"?$val["imgName"]:$fileName,"fileType"=>$val["fileType"]];
         },$request->productImg)):null;
-
         $product->status = $request->status === "true"?"active":"inactive";
         $product->update();
 
@@ -373,12 +367,30 @@ class ProductsController extends Controller
         }
     }
 
+    public function prdStatusChg(Request $request)
+    {
+        $product = Products::generalQuery()
+                             ->where("id",$request->prdId)
+                             ->first();
+
+        $product->status = $product->status === "active"?"inactive":"active";
+        $product->update();
+    }
+
     public function delPrd(Request $request)
     {
         $prdToDel = Products::generalQuery()
                               ->where("id",$request->productId)
                               ->first();
         $prdToDel->deleted_at = now();
+
+        if($prdToDel->images)
+        {
+            foreach($prdToDel->images as $img)
+            {
+                Storage::disk("product_img")->delete($img["imgName"]);
+            }
+        }
 
         $prdCategory = ProductCategory::generalQuery()
                                         ->where("id",$prdToDel->category_id)

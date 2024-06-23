@@ -25,7 +25,11 @@ export default function MdlCRUDProducts({prdDetails = null}) {
         if(prdDetails)
         {
             $("#inCreateProductName").val(prdDetails.product_name).trigger("change");
+            $("#selProductsCategory > option").remove();
+            $("#selProductsCategory").append("<option value='"+prdDetails.category_id+"' selected>"+prdDetails.category_name+"</option>");
             $("#selProductsCategory").val(prdDetails.category_id).trigger("change");
+            $("#selProductsSubcategory > option").remove();
+            $("#selProductsSubcategory").append("<option value='"+prdDetails.subcategory_id+"' selected>"+prdDetails.subcategory_name+"</option>");
             $("#selProductsSubcategory").val(prdDetails.subcategory_id).trigger("change");
             $("#inCreateProductPrice").val(prdDetails.price).trigger("change");
             $("#inCreateProductStock").val(prdDetails.stock_count).trigger("change");

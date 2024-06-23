@@ -51,6 +51,8 @@ Route::group(["prefix"=>"manageProducts"],function()
     Route::post("/updatePrd","ProductsController@updatePrd");
 
     Route::post("/delPrd","ProductsController@delPrd");
+
+    Route::post("/prdStatusChg","ProductsController@prdStatusChg");
 });
 
 Route::group(["prefix"=>"/manageCategories"],function()

@@ -1,10 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 export default function AdminSidebar() {
     return (<>
                 <div id="divAdminSidebar" className='collapsed'>
                     <div className='divAdminSidebarTitle'>Admin Dashboard</div>
+                    <div onClick={()=>{window.location.href = "/"}}>
+                        <FontAwesomeIcon icon={faHouse} />
+                        Home
+                    </div>
                     <div onClick={()=>{window.location.href = "/manageProducts"}}>
                         <i className="fa-solid fa-box"></i>
                         Products

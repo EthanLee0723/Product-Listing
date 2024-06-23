@@ -8,9 +8,6 @@ import '../../library/fontawesome-free-6.5.2-web/css/all.min.css';
 import '../../library/select2-4.1.0-rc.0/dist/css/select2.min.css';
 import '../../library/select2-4.1.0-rc.0/dist/js/select2.min.js';
 import AdminSidebar from './adminSidebar.js';
-import CategoriesModal from './CategoriesModal.js';
-import ProductsModal from './ProductsModal.js';
-// import $ from 'jquery';
 
 export default function MainNavbar() {
     let mainLayout =  <nav id="navMainNavbar">
