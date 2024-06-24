@@ -36,11 +36,16 @@ Route::get('/FAQ',function(){
     return view("faqPage");
 });
 
-Route::get("/contact",function(){
-    return view("contactPage");
+Route::group(["prefix"=>"/contact"],function()
+{
+    Route::get("/",function(){
+        return view("contactPage");
+    });
+
+    Route::post("/sendContactUsMsg","MainController@sendContactUsMsg");
 });
 
-Route::group(["prefix"=>"manageProducts"],function()
+Route::group(["prefix"=>"manageProducts",'middleware'=>['checkAdminSession']],function()
 {
     Route::get("/",function()
     {
@@ -62,7 +67,7 @@ Route::group(["prefix"=>"manageProducts"],function()
     Route::post("/prdStatusChg","ProductsController@prdStatusChg");
 });
 
-Route::group(["prefix"=>"/manageCategories"],function()
+Route::group(["prefix"=>"/manageCategories",'middleware'=>['checkAdminSession']],function()
 {
     Route::get("/",function()
     {

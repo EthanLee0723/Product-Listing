@@ -35,7 +35,7 @@ export function Toast({msg = "",msgType = "success",showToastCount})
         $('.divToast').css("left",$(window).width() / 2 - $('.divToast')[0].getBoundingClientRect().width / 2 +"px")
     }
 
-    return (<div className={"divToast "+msgType}>
+    return (<div onClick={ ()=>{ $('.divToast').removeClass("show") } } className={"divToast "+msgType}>
         {msg}
     </div>)
 }

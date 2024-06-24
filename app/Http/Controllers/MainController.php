@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\NewsletterSignedUp;
 use App\Models\Products;
+use App\Models\CustomerInbox;
+use App\Mail\ContactUs;
+use Mail;
 use Session;
 
 class MainController extends Controller
@@ -50,5 +53,19 @@ class MainController extends Controller
                          ->orderBy("created_at","desc")
                          ->limit(9)
                          ->get();
+    }
+
+    public function sendContactUsMsg(Request $request)
+    {
+        Mail::to("leeweijie41200@gmail.com")
+              ->send(new ContactUs($request->name,$request->contactNo,$request->msg,$request->email));
+
+        $custInbox = new CustomerInbox;
+        $custInbox->customer_name = $request->name;
+        $custInbox->email = $request->email;
+        $custInbox->contact_no_prefix = "+60";
+        $custInbox->contact_no = $request->contactNo;
+        $custInbox->message = $request->msg;
+        $custInbox->save();
     }
 }

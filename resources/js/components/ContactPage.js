@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
 import { useState } from 'react';
+import { Toast } from './GeneralComponents';
 
 
 export default function ContactPage() {
@@ -10,15 +11,37 @@ export default function ContactPage() {
     const [email,setEmail] = useState("");
     const [phoneNo,setPhoneNo] = useState("");
     const [msg,setMsg] = useState("");
+    const [toastMsg,setToastMsg] = useState("");
+    const [toastMsgType,setToastMsgType] = useState("success");
+    const [toastCount,setToastCount] = useState(0);
 
     function sendEmail()
     {
         $.ajax({
-            url: "/contact/sendEmail",
+            url: "/contact/sendContactUsMsg",
             type: "post",
             headers: { "X-CSRF-TOKEN": _token },
-            success: ()=>{
-                
+            data:{
+                name: name,
+                email: email,
+                contactNo: phoneNo,
+                msg: msg
+            },
+            success:()=>{
+                setToastMsg("Message successfully sent!")
+                setToastMsgType("success");
+                setToastCount(toastCount + 1);
+            },
+            error: ()=>{
+                setToastMsg("Oops we've encountered and error, please try again later.")
+                setToastMsgType("error");
+                setToastCount(toastCount + 1);
+            },
+            complete: ()=>{
+                setName("")
+                setEmail("")
+                setPhoneNo("")
+                setMsg("")
             }
         })
     }
@@ -56,6 +79,11 @@ export default function ContactPage() {
                         <div children="normalText">Operating Hours: Mon - Fri 9am - 6pm</div>
                 </div>
             </div>
+            <Toast 
+                msg={toastMsg}
+                msgType= {toastMsgType}
+                showToastCount = {toastCount}
+            />
             <MainFooter/>
         </>
     );

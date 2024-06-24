@@ -1290,7 +1290,7 @@ svg.fa-pen,svg.fa-trash-can
     position: fixed;
     cursor: pointer;
     display: none;
-    top: 1rem;
+    top: 5vh;
     z-index: 1000;
     color: white;
     border-radius: 10px;
