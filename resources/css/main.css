@@ -3,7 +3,7 @@
     --colorPrimary: rgb(238, 102, 26);
     --colorPrimaryHover: rgba(238, 102, 26, .8);
     --colorLightGray: rgb(246, 244, 244);
-    --colorError: rgba(255, 0, 0, 0.7);
+    --colorError: #ff3c3c
 }
 
 a
@@ -482,25 +482,21 @@ svg.fa-pen,svg.fa-trash-can
 
 #divProductsContainer
 {   
-    width: 1200px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
     gap: .5rem;
+    width: 100%;
+    padding: 0 5vw;
+    flex-wrap: wrap;
+    display: flex;
 
     & div
     {
-        flex: 1;
-        display: flex;
-        gap: .5rem;
-
-        & a
-        {
-            background-image: url('../image/sampleProduct.jpg');
-            background-size: cover;
-            flex: 1;
-            cursor: pointer;
-        }
+        aspect-ratio: 2 / 1;
+        flex-basis: calc(100% / 3 - .5rem);
+        flex-grow: 1;
+        cursor: pointer;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
 
@@ -1308,5 +1304,10 @@ svg.fa-pen,svg.fa-trash-can
     &.success
     {
         background-color: #28A745;
+    }
+
+    &.error
+    {
+        background-color: var(--colorError);
     }
 }

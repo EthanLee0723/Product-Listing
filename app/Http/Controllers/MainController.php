@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\NewsletterSignedUp;
+use App\Models\Products;
 use Session;
 
 class MainController extends Controller
@@ -31,5 +33,22 @@ class MainController extends Controller
     {
         Session::flush();
         return redirect("/login");
+    }
+
+    public function signUpNewsletter(Request $request)
+    {
+        $newsletterSignedUp = new NewsletterSignedUp;
+        $newsletterSignedUp->email = $request->newsletterEmail;
+        $newsletterSignedUp->save();
+
+    }
+
+    public function getLatestPrd(Request $request)
+    {
+        return Products::generalQuery()
+                         ->where("status","active")
+                         ->orderBy("created_at","desc")
+                         ->limit(9)
+                         ->get();
     }
 }

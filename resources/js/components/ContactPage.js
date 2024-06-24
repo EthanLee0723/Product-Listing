@@ -2,9 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MainNavbar from './MainNavbar';
 import MainFooter from './MainFooter';
+import { useState } from 'react';
 
 
 export default function ContactPage() {
+    const [name,setName] = useState("");
+    const [email,setEmail] = useState("");
+    const [phoneNo,setPhoneNo] = useState("");
+    const [msg,setMsg] = useState("");
+
+    function sendEmail()
+    {
+        $.ajax({
+            url: "/contact/sendEmail",
+            type: "post",
+            headers: { "X-CSRF-TOKEN": _token },
+            success: ()=>{
+                
+            }
+        })
+    }
+
     return (
         <>
             <MainNavbar/>
@@ -14,22 +32,22 @@ export default function ContactPage() {
                         <label className='normalText'>Fill in this form and we will get back to you  as soon as possible information that you provided here will be held in our database with the utmost discretion and confidentiality</label>
                         <form>
                             <div className='inputPlaceholderContainer'>
-                                <input placeholder=' '></input>
+                                <input value={name} onChange={ev=>setName(ev.target.value)} placeholder=' '></input>
                                 <label>Name</label>
                             </div>
                             <div className='inputPlaceholderContainer'>
-                                <input placeholder=' '></input>
+                                <input value={email} onChange={ev=>setEmail(ev.target.value)} placeholder=' '></input>
                                 <label>Email*</label>
                             </div>
                             <div className='inputPlaceholderContainer'>
-                                <input placeholder=' '></input>
+                                <input value={phoneNo} onChange={ev=>setPhoneNo(ev.target.value)} placeholder=' '></input>
                                 <label>Phone number</label>
                             </div>
                             <div className='inputPlaceholderContainer'>
-                                <input placeholder=' '></input>
+                                <input value={msg} onChange={ev=>setMsg(ev.target.value)} placeholder=' '></input>
                                 <label>Message</label>
                             </div>
-                            <a className='btnOrange mt-5'>Send</a>
+                            <a onClick={sendEmail} className='btnOrange mt-5'>Send</a>
                         </form>
 
                         <h4 className='normalTitle'>Or contact us directly via</h4>

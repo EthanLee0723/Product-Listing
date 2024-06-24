@@ -17,8 +17,15 @@ Route::get('/', function () {
     return redirect("/home");
 });
 
-Route::get("/home",function(){
-    return view("homePage");
+Route::group(["prefix"=>"/home"],function()
+{
+    Route::get("/",function(){
+        return view('homePage');
+    });
+
+    Route::get("/getLatestPrd","MainController@getLatestPrd");
+
+    Route::post('/signUpNewsletter',"MainController@signUpNewsletter");
 });
 
 Route::get('/about', function () {

@@ -2,25 +2,25 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import { useState, useEffect } from "react";
 
-export function Toast({msg = "",msgType = "success",toShow=false})
+export function Toast({msg = "",msgType = "success",showToastCount})
 {
-    const [toShowToast,setToShowToast] = useState(false);
+    const [showToast,setToShowToast] = useState(0);
 
-    function testing()
+    if(showToastCount !== showToast)
     {
-        console.log("dhf");
+        setToShowToast(showToastCount);
     }
     
     useEffect(()=>{
-        if(toShow)
+        if(showToast !== 0)
         {
+            console.log()
             $(".divToast").addClass("show");
             setTimeout(()=>{
                 $(".divToast").removeClass("show");
             },5000);
-            setToShowToast(false);
         }
-    },[toShow])
+    },[showToastCount])
 
     $(()=>{
         adjustToastPos();
