@@ -51,8 +51,8 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+            // 'url' => env('APP_URL').'/storage',
+            // 'visibility' => 'public',
         ],
 
         's3' => [
@@ -63,6 +63,13 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+
+        'product_img' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/products'),
+            'url' => env('APP_URL').'/storage/public/images/products',
+            'visibility' => 'public',
+        ]
 
     ],
 
@@ -78,7 +85,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // public_path('storage') => storage_path('app/public'),
+        public_path('images/products') => storage_path('app/public/images/products')
     ],
 
 ];

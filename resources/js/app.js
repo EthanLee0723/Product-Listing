@@ -12,4 +12,12 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/MainLayout');
+require('./components/HomePage');
+require('./components/AboutPage');
+require('./components/FAQPage');
+require('./components/ContactPage');
+require('./components/ProductsPage');
+require('./components/LoginPage');
+require('./components/ManageCategories');
+require('./components/ManageProducts');
+require('./components/ProductsDetailsPage')
