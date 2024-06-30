@@ -69612,8 +69612,8 @@ if (document.getElementById('mainLayout')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Desktop\Freelance\Product_Listing\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Desktop\Freelance\Product_Listing\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Ethan\Desktop\All\Freelance\Projects\Product-Listing\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Ethan\Desktop\All\Freelance\Projects\Product-Listing\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
