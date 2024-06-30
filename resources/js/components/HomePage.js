@@ -16,7 +16,7 @@ export default function HomePage() {
 
     useEffect(()=>{
         $.ajax({
-            url: "/home/getLatestPrd",
+            url: "http://192.168.100.66:8080/home/getLatestPrd",
             type: "get",
             success: (data)=>{
                 setLatestPrd(data);
@@ -34,7 +34,7 @@ export default function HomePage() {
     function signUpNewsletter()
     {
         $.ajax({
-            url: "/home/signUpNewsletter",
+            url: "http://192.168.100.66:8080/home/signUpNewsletter",
             type: "post",
             headers: { 'X-CSRF-TOKEN':  _token},
             data: { newsletterEmail: newsletterEmail },
