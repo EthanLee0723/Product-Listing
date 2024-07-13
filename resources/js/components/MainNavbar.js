@@ -11,7 +11,7 @@ import AdminSidebar from './adminSidebar.js';
 
 export default function MainNavbar() {
     let mainLayout =  <nav id="navMainNavbar">
-                            <a href="/home"><label>GTY Solutions</label></a>
+                            <a href="/home"><label>Goods To You</label></a>
                             <div id='mainNavbarContent'>
                                 <a href="/home">Home</a>
                                 <a href="/about">About</a>
