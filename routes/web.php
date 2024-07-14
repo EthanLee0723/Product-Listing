@@ -51,21 +51,6 @@ Route::group(["prefix"=>"manageProducts",'middleware'=>['checkAdminSession']],fu
 {
     Route::get("/",function()
     {
-        $products = Products::whereNull("deleted_at")
-                              ->whereDate("created_at","2024-07-14")
-                              ->get()
-                              ->toArray();
-
-        foreach($products as $ind=>$prd)
-        {
-            $createdAt = Carbon::parse($prd["created_at"]);
-            $createdAt->subDays(10); 
-
-            Products::whereNull("deleted_at")
-                      ->where("id",$prd["id"])
-                      ->update(["created_at"=>$createdAt,"updated_at"=>$createdAt]);
-        }
-
         return view("manageProducts");
     });
 
