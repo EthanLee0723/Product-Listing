@@ -163,7 +163,7 @@ class ProductsController extends Controller
                                                    ->select(["id","subcategory_name as text"])
                                                    ->get()
                                                    ->toArray();
-
+                                                   
         return ["results"=>$productSubcategory];
     }
 
